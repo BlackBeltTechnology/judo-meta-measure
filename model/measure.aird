@@ -486,7 +486,7 @@
       </ownedStyle>
       <actualMapping xmi:type="description_1:EdgeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@edgeMappings[name='EC_EReference']"/>
     </ownedDiagramElements>
-    <ownedDiagramElements xmi:type="diagram:DEdge" xmi:id="_6me8oCPEEemiuM_tO8e5iw" name="[1..1] terms" sourceNode="_6mIXUCPEEemiuM_tO8e5iw" targetNode="_6mKzkCPEEemiuM_tO8e5iw">
+    <ownedDiagramElements xmi:type="diagram:DEdge" xmi:id="_6me8oCPEEemiuM_tO8e5iw" name="[1..*] terms" sourceNode="_6mIXUCPEEemiuM_tO8e5iw" targetNode="_6mKzkCPEEemiuM_tO8e5iw">
       <target xmi:type="ecore:EReference" href="measure.ecore#//DerivedMeasure/terms"/>
       <semanticElements xmi:type="ecore:EReference" href="measure.ecore#//DerivedMeasure/terms"/>
       <ownedStyle xmi:type="diagram:EdgeStyle" xmi:id="_6mfjsyPEEemiuM_tO8e5iw" description="_6mfjsCPEEemiuM_tO8e5iw" sourceArrow="FillDiamond" routingStyle="manhattan" strokeColor="0,0,0">

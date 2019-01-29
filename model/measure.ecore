@@ -16,8 +16,8 @@
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigDecimal"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DerivedMeasure" eSuperTypes="#//Measure">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="terms" lowerBound="1" eType="#//BaseMeasureTerm"
-        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="terms" lowerBound="1" upperBound="-1"
+        eType="#//BaseMeasureTerm" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="BaseMeasure" eSuperTypes="#//Measure"/>
   <eClassifiers xsi:type="ecore:EClass" name="BaseMeasureTerm">
