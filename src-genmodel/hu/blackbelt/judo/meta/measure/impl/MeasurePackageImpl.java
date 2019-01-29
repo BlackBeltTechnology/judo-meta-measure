@@ -151,7 +151,7 @@ public class MeasurePackageImpl extends EPackageImpl implements MeasurePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getMeasure_Name() {
+	public EAttribute getMeasure_Namespace() {
 		return (EAttribute)measureEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -160,7 +160,7 @@ public class MeasurePackageImpl extends EPackageImpl implements MeasurePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getMeasure_RateDividend() {
+	public EAttribute getMeasure_Name() {
 		return (EAttribute)measureEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -169,17 +169,8 @@ public class MeasurePackageImpl extends EPackageImpl implements MeasurePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getMeasure_RateDivisor() {
-		return (EAttribute)measureEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EReference getMeasure_Units() {
-		return (EReference)measureEClass.getEStructuralFeatures().get(3);
+		return (EReference)measureEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -198,6 +189,24 @@ public class MeasurePackageImpl extends EPackageImpl implements MeasurePackage {
 	 */
 	public EAttribute getUnit_Name() {
 		return (EAttribute)unitEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getUnit_RateDividend() {
+		return (EAttribute)unitEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getUnit_RateDivisor() {
+		return (EAttribute)unitEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -310,13 +319,14 @@ public class MeasurePackageImpl extends EPackageImpl implements MeasurePackage {
 
 		// Create classes and their features
 		measureEClass = createEClass(MEASURE);
+		createEAttribute(measureEClass, MEASURE__NAMESPACE);
 		createEAttribute(measureEClass, MEASURE__NAME);
-		createEAttribute(measureEClass, MEASURE__RATE_DIVIDEND);
-		createEAttribute(measureEClass, MEASURE__RATE_DIVISOR);
 		createEReference(measureEClass, MEASURE__UNITS);
 
 		unitEClass = createEClass(UNIT);
 		createEAttribute(unitEClass, UNIT__NAME);
+		createEAttribute(unitEClass, UNIT__RATE_DIVIDEND);
+		createEAttribute(unitEClass, UNIT__RATE_DIVISOR);
 
 		derivedMeasureEClass = createEClass(DERIVED_MEASURE);
 		createEReference(derivedMeasureEClass, DERIVED_MEASURE__TERMS);
@@ -368,13 +378,14 @@ public class MeasurePackageImpl extends EPackageImpl implements MeasurePackage {
 
 		// Initialize classes, features, and operations; add parameters
 		initEClass(measureEClass, Measure.class, "Measure", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getMeasure_Namespace(), ecorePackage.getEString(), "namespace", null, 1, 1, Measure.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getMeasure_Name(), ecorePackage.getEString(), "name", null, 1, 1, Measure.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getMeasure_RateDividend(), ecorePackage.getEBigDecimal(), "rateDividend", null, 1, 1, Measure.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getMeasure_RateDivisor(), ecorePackage.getEBigDecimal(), "rateDivisor", null, 1, 1, Measure.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getMeasure_Units(), this.getUnit(), null, "units", null, 0, -1, Measure.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getMeasure_Units(), this.getUnit(), null, "units", null, 0, -1, Measure.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(unitEClass, Unit.class, "Unit", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getUnit_Name(), ecorePackage.getEString(), "name", null, 1, 1, Unit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getUnit_RateDividend(), ecorePackage.getEBigDecimal(), "rateDividend", null, 1, 1, Unit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getUnit_RateDivisor(), ecorePackage.getEBigDecimal(), "rateDivisor", null, 1, 1, Unit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(derivedMeasureEClass, DerivedMeasure.class, "DerivedMeasure", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getDerivedMeasure_Terms(), this.getBaseMeasureTerm(), null, "terms", null, 1, 1, DerivedMeasure.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

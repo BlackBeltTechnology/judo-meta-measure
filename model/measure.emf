@@ -2,14 +2,15 @@
 package measure;
 
 abstract class Measure {
+  attr String[1] namespace;
   attr String[1] name;
-  attr EBigDecimal[1] rateDividend;
-  attr EBigDecimal[1] rateDivisor;
-  ref Unit[*] units;
+  val Unit[*] units;
 }
 
 class Unit {
   attr String[1] name;
+  attr EBigDecimal[1] rateDividend;
+  attr EBigDecimal[1] rateDivisor;
 }
 
 class DerivedMeasure extends Measure {

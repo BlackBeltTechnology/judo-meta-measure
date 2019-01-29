@@ -2,8 +2,6 @@
  */
 package hu.blackbelt.judo.meta.measure;
 
-import java.math.BigDecimal;
-
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EObject;
@@ -17,9 +15,8 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * </p>
  * <ul>
+ *   <li>{@link hu.blackbelt.judo.meta.measure.Measure#getNamespace <em>Namespace</em>}</li>
  *   <li>{@link hu.blackbelt.judo.meta.measure.Measure#getName <em>Name</em>}</li>
- *   <li>{@link hu.blackbelt.judo.meta.measure.Measure#getRateDividend <em>Rate Dividend</em>}</li>
- *   <li>{@link hu.blackbelt.judo.meta.measure.Measure#getRateDivisor <em>Rate Divisor</em>}</li>
  *   <li>{@link hu.blackbelt.judo.meta.measure.Measure#getUnits <em>Units</em>}</li>
  * </ul>
  *
@@ -28,6 +25,32 @@ import org.eclipse.emf.ecore.EObject;
  * @generated
  */
 public interface Measure extends EObject {
+	/**
+	 * Returns the value of the '<em><b>Namespace</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Namespace</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Namespace</em>' attribute.
+	 * @see #setNamespace(String)
+	 * @see hu.blackbelt.judo.meta.measure.MeasurePackage#getMeasure_Namespace()
+	 * @model required="true"
+	 * @generated
+	 */
+	String getNamespace();
+
+	/**
+	 * Sets the value of the '{@link hu.blackbelt.judo.meta.measure.Measure#getNamespace <em>Namespace</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Namespace</em>' attribute.
+	 * @see #getNamespace()
+	 * @generated
+	 */
+	void setNamespace(String value);
+
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -55,59 +78,7 @@ public interface Measure extends EObject {
 	void setName(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Rate Dividend</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Rate Dividend</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Rate Dividend</em>' attribute.
-	 * @see #setRateDividend(BigDecimal)
-	 * @see hu.blackbelt.judo.meta.measure.MeasurePackage#getMeasure_RateDividend()
-	 * @model required="true"
-	 * @generated
-	 */
-	BigDecimal getRateDividend();
-
-	/**
-	 * Sets the value of the '{@link hu.blackbelt.judo.meta.measure.Measure#getRateDividend <em>Rate Dividend</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Rate Dividend</em>' attribute.
-	 * @see #getRateDividend()
-	 * @generated
-	 */
-	void setRateDividend(BigDecimal value);
-
-	/**
-	 * Returns the value of the '<em><b>Rate Divisor</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Rate Divisor</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Rate Divisor</em>' attribute.
-	 * @see #setRateDivisor(BigDecimal)
-	 * @see hu.blackbelt.judo.meta.measure.MeasurePackage#getMeasure_RateDivisor()
-	 * @model required="true"
-	 * @generated
-	 */
-	BigDecimal getRateDivisor();
-
-	/**
-	 * Sets the value of the '{@link hu.blackbelt.judo.meta.measure.Measure#getRateDivisor <em>Rate Divisor</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Rate Divisor</em>' attribute.
-	 * @see #getRateDivisor()
-	 * @generated
-	 */
-	void setRateDivisor(BigDecimal value);
-
-	/**
-	 * Returns the value of the '<em><b>Units</b></em>' reference list.
+	 * Returns the value of the '<em><b>Units</b></em>' containment reference list.
 	 * The list contents are of type {@link hu.blackbelt.judo.meta.measure.Unit}.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -115,9 +86,9 @@ public interface Measure extends EObject {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Units</em>' reference list.
+	 * @return the value of the '<em>Units</em>' containment reference list.
 	 * @see hu.blackbelt.judo.meta.measure.MeasurePackage#getMeasure_Units()
-	 * @model
+	 * @model containment="true"
 	 * @generated
 	 */
 	EList<Unit> getUnits();

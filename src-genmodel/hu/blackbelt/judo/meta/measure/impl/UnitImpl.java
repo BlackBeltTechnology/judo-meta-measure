@@ -5,6 +5,7 @@ package hu.blackbelt.judo.meta.measure.impl;
 import hu.blackbelt.judo.meta.measure.MeasurePackage;
 import hu.blackbelt.judo.meta.measure.Unit;
 
+import java.math.BigDecimal;
 import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.ecore.EClass;
@@ -21,6 +22,8 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  * </p>
  * <ul>
  *   <li>{@link hu.blackbelt.judo.meta.measure.impl.UnitImpl#getName <em>Name</em>}</li>
+ *   <li>{@link hu.blackbelt.judo.meta.measure.impl.UnitImpl#getRateDividend <em>Rate Dividend</em>}</li>
+ *   <li>{@link hu.blackbelt.judo.meta.measure.impl.UnitImpl#getRateDivisor <em>Rate Divisor</em>}</li>
  * </ul>
  *
  * @generated
@@ -45,6 +48,46 @@ public class UnitImpl extends MinimalEObjectImpl.Container implements Unit {
 	 * @ordered
 	 */
 	protected String name = NAME_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getRateDividend() <em>Rate Dividend</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getRateDividend()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final BigDecimal RATE_DIVIDEND_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getRateDividend() <em>Rate Dividend</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getRateDividend()
+	 * @generated
+	 * @ordered
+	 */
+	protected BigDecimal rateDividend = RATE_DIVIDEND_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getRateDivisor() <em>Rate Divisor</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getRateDivisor()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final BigDecimal RATE_DIVISOR_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getRateDivisor() <em>Rate Divisor</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getRateDivisor()
+	 * @generated
+	 * @ordered
+	 */
+	protected BigDecimal rateDivisor = RATE_DIVISOR_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -91,11 +134,57 @@ public class UnitImpl extends MinimalEObjectImpl.Container implements Unit {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public BigDecimal getRateDividend() {
+		return rateDividend;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setRateDividend(BigDecimal newRateDividend) {
+		BigDecimal oldRateDividend = rateDividend;
+		rateDividend = newRateDividend;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, MeasurePackage.UNIT__RATE_DIVIDEND, oldRateDividend, rateDividend));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public BigDecimal getRateDivisor() {
+		return rateDivisor;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setRateDivisor(BigDecimal newRateDivisor) {
+		BigDecimal oldRateDivisor = rateDivisor;
+		rateDivisor = newRateDivisor;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, MeasurePackage.UNIT__RATE_DIVISOR, oldRateDivisor, rateDivisor));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case MeasurePackage.UNIT__NAME:
 				return getName();
+			case MeasurePackage.UNIT__RATE_DIVIDEND:
+				return getRateDividend();
+			case MeasurePackage.UNIT__RATE_DIVISOR:
+				return getRateDivisor();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -110,6 +199,12 @@ public class UnitImpl extends MinimalEObjectImpl.Container implements Unit {
 		switch (featureID) {
 			case MeasurePackage.UNIT__NAME:
 				setName((String)newValue);
+				return;
+			case MeasurePackage.UNIT__RATE_DIVIDEND:
+				setRateDividend((BigDecimal)newValue);
+				return;
+			case MeasurePackage.UNIT__RATE_DIVISOR:
+				setRateDivisor((BigDecimal)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -126,6 +221,12 @@ public class UnitImpl extends MinimalEObjectImpl.Container implements Unit {
 			case MeasurePackage.UNIT__NAME:
 				setName(NAME_EDEFAULT);
 				return;
+			case MeasurePackage.UNIT__RATE_DIVIDEND:
+				setRateDividend(RATE_DIVIDEND_EDEFAULT);
+				return;
+			case MeasurePackage.UNIT__RATE_DIVISOR:
+				setRateDivisor(RATE_DIVISOR_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -140,6 +241,10 @@ public class UnitImpl extends MinimalEObjectImpl.Container implements Unit {
 		switch (featureID) {
 			case MeasurePackage.UNIT__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case MeasurePackage.UNIT__RATE_DIVIDEND:
+				return RATE_DIVIDEND_EDEFAULT == null ? rateDividend != null : !RATE_DIVIDEND_EDEFAULT.equals(rateDividend);
+			case MeasurePackage.UNIT__RATE_DIVISOR:
+				return RATE_DIVISOR_EDEFAULT == null ? rateDivisor != null : !RATE_DIVISOR_EDEFAULT.equals(rateDivisor);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -156,6 +261,10 @@ public class UnitImpl extends MinimalEObjectImpl.Container implements Unit {
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (name: ");
 		result.append(name);
+		result.append(", rateDividend: ");
+		result.append(rateDividend);
+		result.append(", rateDivisor: ");
+		result.append(rateDivisor);
 		result.append(')');
 		return result.toString();
 	}

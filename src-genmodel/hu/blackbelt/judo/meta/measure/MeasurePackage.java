@@ -68,40 +68,31 @@ public interface MeasurePackage extends EPackage {
 	int MEASURE = 0;
 
 	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MEASURE__NAMESPACE = 0;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MEASURE__NAME = 0;
+	int MEASURE__NAME = 1;
 
 	/**
-	 * The feature id for the '<em><b>Rate Dividend</b></em>' attribute.
+	 * The feature id for the '<em><b>Units</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MEASURE__RATE_DIVIDEND = 1;
-
-	/**
-	 * The feature id for the '<em><b>Rate Divisor</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MEASURE__RATE_DIVISOR = 2;
-
-	/**
-	 * The feature id for the '<em><b>Units</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MEASURE__UNITS = 3;
+	int MEASURE__UNITS = 2;
 
 	/**
 	 * The number of structural features of the '<em>Measure</em>' class.
@@ -110,7 +101,7 @@ public interface MeasurePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MEASURE_FEATURE_COUNT = 4;
+	int MEASURE_FEATURE_COUNT = 3;
 
 	/**
 	 * The number of operations of the '<em>Measure</em>' class.
@@ -141,13 +132,31 @@ public interface MeasurePackage extends EPackage {
 	int UNIT__NAME = 0;
 
 	/**
+	 * The feature id for the '<em><b>Rate Dividend</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNIT__RATE_DIVIDEND = 1;
+
+	/**
+	 * The feature id for the '<em><b>Rate Divisor</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNIT__RATE_DIVISOR = 2;
+
+	/**
 	 * The number of structural features of the '<em>Unit</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int UNIT_FEATURE_COUNT = 1;
+	int UNIT_FEATURE_COUNT = 3;
 
 	/**
 	 * The number of operations of the '<em>Unit</em>' class.
@@ -169,6 +178,15 @@ public interface MeasurePackage extends EPackage {
 	int DERIVED_MEASURE = 2;
 
 	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DERIVED_MEASURE__NAMESPACE = MEASURE__NAMESPACE;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -178,25 +196,7 @@ public interface MeasurePackage extends EPackage {
 	int DERIVED_MEASURE__NAME = MEASURE__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Rate Dividend</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DERIVED_MEASURE__RATE_DIVIDEND = MEASURE__RATE_DIVIDEND;
-
-	/**
-	 * The feature id for the '<em><b>Rate Divisor</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DERIVED_MEASURE__RATE_DIVISOR = MEASURE__RATE_DIVISOR;
-
-	/**
-	 * The feature id for the '<em><b>Units</b></em>' reference list.
+	 * The feature id for the '<em><b>Units</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -242,6 +242,15 @@ public interface MeasurePackage extends EPackage {
 	int BASE_MEASURE = 3;
 
 	/**
+	 * The feature id for the '<em><b>Namespace</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BASE_MEASURE__NAMESPACE = MEASURE__NAMESPACE;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -251,25 +260,7 @@ public interface MeasurePackage extends EPackage {
 	int BASE_MEASURE__NAME = MEASURE__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Rate Dividend</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BASE_MEASURE__RATE_DIVIDEND = MEASURE__RATE_DIVIDEND;
-
-	/**
-	 * The feature id for the '<em><b>Rate Divisor</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BASE_MEASURE__RATE_DIVISOR = MEASURE__RATE_DIVISOR;
-
-	/**
-	 * The feature id for the '<em><b>Units</b></em>' reference list.
+	 * The feature id for the '<em><b>Units</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -361,6 +352,24 @@ public interface MeasurePackage extends EPackage {
 	int DURATION_UNIT__NAME = UNIT__NAME;
 
 	/**
+	 * The feature id for the '<em><b>Rate Dividend</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DURATION_UNIT__RATE_DIVIDEND = UNIT__RATE_DIVIDEND;
+
+	/**
+	 * The feature id for the '<em><b>Rate Divisor</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DURATION_UNIT__RATE_DIVISOR = UNIT__RATE_DIVISOR;
+
+	/**
 	 * The feature id for the '<em><b>Type</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -409,6 +418,17 @@ public interface MeasurePackage extends EPackage {
 	EClass getMeasure();
 
 	/**
+	 * Returns the meta object for the attribute '{@link hu.blackbelt.judo.meta.measure.Measure#getNamespace <em>Namespace</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Namespace</em>'.
+	 * @see hu.blackbelt.judo.meta.measure.Measure#getNamespace()
+	 * @see #getMeasure()
+	 * @generated
+	 */
+	EAttribute getMeasure_Namespace();
+
+	/**
 	 * Returns the meta object for the attribute '{@link hu.blackbelt.judo.meta.measure.Measure#getName <em>Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -420,32 +440,10 @@ public interface MeasurePackage extends EPackage {
 	EAttribute getMeasure_Name();
 
 	/**
-	 * Returns the meta object for the attribute '{@link hu.blackbelt.judo.meta.measure.Measure#getRateDividend <em>Rate Dividend</em>}'.
+	 * Returns the meta object for the containment reference list '{@link hu.blackbelt.judo.meta.measure.Measure#getUnits <em>Units</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Rate Dividend</em>'.
-	 * @see hu.blackbelt.judo.meta.measure.Measure#getRateDividend()
-	 * @see #getMeasure()
-	 * @generated
-	 */
-	EAttribute getMeasure_RateDividend();
-
-	/**
-	 * Returns the meta object for the attribute '{@link hu.blackbelt.judo.meta.measure.Measure#getRateDivisor <em>Rate Divisor</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Rate Divisor</em>'.
-	 * @see hu.blackbelt.judo.meta.measure.Measure#getRateDivisor()
-	 * @see #getMeasure()
-	 * @generated
-	 */
-	EAttribute getMeasure_RateDivisor();
-
-	/**
-	 * Returns the meta object for the reference list '{@link hu.blackbelt.judo.meta.measure.Measure#getUnits <em>Units</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Units</em>'.
+	 * @return the meta object for the containment reference list '<em>Units</em>'.
 	 * @see hu.blackbelt.judo.meta.measure.Measure#getUnits()
 	 * @see #getMeasure()
 	 * @generated
@@ -472,6 +470,28 @@ public interface MeasurePackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getUnit_Name();
+
+	/**
+	 * Returns the meta object for the attribute '{@link hu.blackbelt.judo.meta.measure.Unit#getRateDividend <em>Rate Dividend</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Rate Dividend</em>'.
+	 * @see hu.blackbelt.judo.meta.measure.Unit#getRateDividend()
+	 * @see #getUnit()
+	 * @generated
+	 */
+	EAttribute getUnit_RateDividend();
+
+	/**
+	 * Returns the meta object for the attribute '{@link hu.blackbelt.judo.meta.measure.Unit#getRateDivisor <em>Rate Divisor</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Rate Divisor</em>'.
+	 * @see hu.blackbelt.judo.meta.measure.Unit#getRateDivisor()
+	 * @see #getUnit()
+	 * @generated
+	 */
+	EAttribute getUnit_RateDivisor();
 
 	/**
 	 * Returns the meta object for class '{@link hu.blackbelt.judo.meta.measure.DerivedMeasure <em>Derived Measure</em>}'.
@@ -601,6 +621,14 @@ public interface MeasurePackage extends EPackage {
 		EClass MEASURE = eINSTANCE.getMeasure();
 
 		/**
+		 * The meta object literal for the '<em><b>Namespace</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute MEASURE__NAMESPACE = eINSTANCE.getMeasure_Namespace();
+
+		/**
 		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -609,23 +637,7 @@ public interface MeasurePackage extends EPackage {
 		EAttribute MEASURE__NAME = eINSTANCE.getMeasure_Name();
 
 		/**
-		 * The meta object literal for the '<em><b>Rate Dividend</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute MEASURE__RATE_DIVIDEND = eINSTANCE.getMeasure_RateDividend();
-
-		/**
-		 * The meta object literal for the '<em><b>Rate Divisor</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute MEASURE__RATE_DIVISOR = eINSTANCE.getMeasure_RateDivisor();
-
-		/**
-		 * The meta object literal for the '<em><b>Units</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Units</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -649,6 +661,22 @@ public interface MeasurePackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute UNIT__NAME = eINSTANCE.getUnit_Name();
+
+		/**
+		 * The meta object literal for the '<em><b>Rate Dividend</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute UNIT__RATE_DIVIDEND = eINSTANCE.getUnit_RateDividend();
+
+		/**
+		 * The meta object literal for the '<em><b>Rate Divisor</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute UNIT__RATE_DIVISOR = eINSTANCE.getUnit_RateDivisor();
 
 		/**
 		 * The meta object literal for the '{@link hu.blackbelt.judo.meta.measure.impl.DerivedMeasureImpl <em>Derived Measure</em>}' class.
