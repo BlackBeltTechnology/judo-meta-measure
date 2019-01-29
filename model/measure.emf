@@ -1,4 +1,4 @@
-@namespace(uri="http://blackbelt.hu/judo/asm/measure", prefix="measure")
+@namespace(uri="http://blackbelt.hu/judo/meta/measure", prefix="measure")
 package measure;
 
 abstract class Measure {

@@ -9,7 +9,7 @@
    <extension point="org.eclipse.emf.ecore.generated_package">
       <!-- @generated measure -->
       <package
-            uri="http://blackbelt.hu/judo/asm/measure"
+            uri="http://blackbelt.hu/judo/meta/measure"
             class="hu.blackbelt.judo.meta.measure.MeasurePackage"
             genModel="model/measure.genmodel"/>
    </extension>

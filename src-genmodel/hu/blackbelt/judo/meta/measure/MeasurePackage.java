@@ -39,7 +39,7 @@ public interface MeasurePackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_URI = "http://blackbelt.hu/judo/asm/measure";
+	String eNS_URI = "http://blackbelt.hu/judo/meta/measure";
 
 	/**
 	 * The package namespace name.
