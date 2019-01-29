@@ -1,0 +1,41 @@
+@namespace(uri="http://blackbelt.hu/judo/asm/measure", prefix="measure")
+package measure;
+
+abstract class Measure {
+  attr String[1] name;
+  attr EBigDecimal[1] rateDividend;
+  attr EBigDecimal[1] rateDivisor;
+  ref Unit[*] units;
+}
+
+class Unit {
+  attr String[1] name;
+}
+
+class DerivedMeasure extends Measure {
+  val BaseMeasureTerm[1] terms;
+}
+
+class BaseMeasure extends Measure {
+}
+
+class BaseMeasureTerm {
+  attr int[1] exponent;
+  ref BaseMeasure[1] baseMeasure;
+}
+
+enum DurationType {
+  millisecond = 0;
+  second = 1;
+  minute = 2;
+  hour = 3;
+  day = 4;
+  week = 5;
+  month = 6;
+  year = 7;
+}
+
+class DurationUnit extends Unit {
+  attr DurationType[1] type;
+}
+

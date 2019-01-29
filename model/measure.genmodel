@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/judo-meta-measure/src-genmodel" modelPluginID="judo-meta-measure"
+    modelName="JudoMeasure" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="8.0" copyrightFields="false"
+    operationReflection="true" importOrganizing="true">
+  <foreignModel>measure.ecore</foreignModel>
+  <genPackages prefix="Measure" basePackage="hu.blackbelt.judo.meta" resource="XML"
+      disposableProviderFactory="true" dataTypeConverters="true" extensibleProviderFactory="true"
+      ecorePackage="measure.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="measure.ecore#//DurationType">
+      <genEnumLiterals ecoreEnumLiteral="measure.ecore#//DurationType/millisecond"/>
+      <genEnumLiterals ecoreEnumLiteral="measure.ecore#//DurationType/second"/>
+      <genEnumLiterals ecoreEnumLiteral="measure.ecore#//DurationType/minute"/>
+      <genEnumLiterals ecoreEnumLiteral="measure.ecore#//DurationType/hour"/>
+      <genEnumLiterals ecoreEnumLiteral="measure.ecore#//DurationType/day"/>
+      <genEnumLiterals ecoreEnumLiteral="measure.ecore#//DurationType/week"/>
+      <genEnumLiterals ecoreEnumLiteral="measure.ecore#//DurationType/month"/>
+      <genEnumLiterals ecoreEnumLiteral="measure.ecore#//DurationType/year"/>
+    </genEnums>
+    <genClasses image="false" ecoreClass="measure.ecore#//Measure">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute measure.ecore#//Measure/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute measure.ecore#//Measure/rateDividend"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute measure.ecore#//Measure/rateDivisor"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference measure.ecore#//Measure/units"/>
+    </genClasses>
+    <genClasses ecoreClass="measure.ecore#//Unit">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute measure.ecore#//Unit/name"/>
+    </genClasses>
+    <genClasses ecoreClass="measure.ecore#//DerivedMeasure">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference measure.ecore#//DerivedMeasure/terms"/>
+    </genClasses>
+    <genClasses ecoreClass="measure.ecore#//BaseMeasure"/>
+    <genClasses ecoreClass="measure.ecore#//BaseMeasureTerm">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute measure.ecore#//BaseMeasureTerm/exponent"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference measure.ecore#//BaseMeasureTerm/baseMeasure"/>
+    </genClasses>
+    <genClasses ecoreClass="measure.ecore#//DurationUnit">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute measure.ecore#//DurationUnit/type"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>
