@@ -61,14 +61,6 @@
               <styles xmi:type="notation:FontStyle" xmi:id="_6msYBCPEEemiuM_tO8e5iw" fontName="Sans" fontHeight="8" bold="true"/>
               <layoutConstraint xmi:type="notation:Location" xmi:id="_6msYBSPEEemiuM_tO8e5iw"/>
             </children>
-            <children xmi:type="notation:Node" xmi:id="_6ms_ECPEEemiuM_tO8e5iw" type="3010" element="_6mVLoCPEEemiuM_tO8e5iw">
-              <styles xmi:type="notation:FontStyle" xmi:id="_6ms_ESPEEemiuM_tO8e5iw" fontName="Sans" fontHeight="8" bold="true"/>
-              <layoutConstraint xmi:type="notation:Location" xmi:id="_6ms_EiPEEemiuM_tO8e5iw"/>
-            </children>
-            <children xmi:type="notation:Node" xmi:id="_6mtmICPEEemiuM_tO8e5iw" type="3010" element="_6mVysSPEEemiuM_tO8e5iw">
-              <styles xmi:type="notation:FontStyle" xmi:id="_6mtmISPEEemiuM_tO8e5iw" fontName="Sans" fontHeight="8" bold="true"/>
-              <layoutConstraint xmi:type="notation:Location" xmi:id="_6mtmIiPEEemiuM_tO8e5iw"/>
-            </children>
             <styles xmi:type="notation:SortingStyle" xmi:id="_6mmRYiPEEemiuM_tO8e5iw"/>
             <styles xmi:type="notation:FilteringStyle" xmi:id="_6mmRYyPEEemiuM_tO8e5iw"/>
           </children>
@@ -81,6 +73,14 @@
             <children xmi:type="notation:Node" xmi:id="_6mtmIyPEEemiuM_tO8e5iw" type="3010" element="_6mXA0CPEEemiuM_tO8e5iw">
               <styles xmi:type="notation:FontStyle" xmi:id="_6mtmJCPEEemiuM_tO8e5iw" fontName="Sans" fontHeight="8" bold="true"/>
               <layoutConstraint xmi:type="notation:Location" xmi:id="_6mtmJSPEEemiuM_tO8e5iw"/>
+            </children>
+            <children xmi:type="notation:Node" xmi:id="_GMx7QCPOEemLpvUY7MQgng" type="3010" element="_GMLeUCPOEemLpvUY7MQgng">
+              <styles xmi:type="notation:FontStyle" xmi:id="_GMx7QSPOEemLpvUY7MQgng" fontName="Sans" fontHeight="8" bold="true"/>
+              <layoutConstraint xmi:type="notation:Location" xmi:id="_GMx7QiPOEemLpvUY7MQgng"/>
+            </children>
+            <children xmi:type="notation:Node" xmi:id="_GM3a0CPOEemLpvUY7MQgng" type="3010" element="_GMOhoCPOEemLpvUY7MQgng">
+              <styles xmi:type="notation:FontStyle" xmi:id="_GM3a0SPOEemLpvUY7MQgng" fontName="Sans" fontHeight="8" bold="true"/>
+              <layoutConstraint xmi:type="notation:Location" xmi:id="_GM3a0iPOEemLpvUY7MQgng"/>
             </children>
             <styles xmi:type="notation:SortingStyle" xmi:id="_6mm4ciPEEemiuM_tO8e5iw"/>
             <styles xmi:type="notation:FilteringStyle" xmi:id="_6mm4cyPEEemiuM_tO8e5iw"/>
@@ -288,22 +288,6 @@
         </ownedStyle>
         <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='EC%20EAttribute']"/>
       </ownedElements>
-      <ownedElements xmi:type="diagram:DNodeListElement" xmi:id="_6mVLoCPEEemiuM_tO8e5iw" name="rateDividend : EBigDecimal" tooltipText="">
-        <target xmi:type="ecore:EAttribute" href="measure.ecore#//Measure/rateDividend"/>
-        <semanticElements xmi:type="ecore:EAttribute" href="measure.ecore#//Measure/rateDividend"/>
-        <ownedStyle xmi:type="diagram:BundledImage" xmi:id="_6mVysCPEEemiuM_tO8e5iw" labelAlignment="LEFT" description="_6mUkkCPEEemiuM_tO8e5iw">
-          <labelFormat>bold</labelFormat>
-        </ownedStyle>
-        <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='EC%20EAttribute']"/>
-      </ownedElements>
-      <ownedElements xmi:type="diagram:DNodeListElement" xmi:id="_6mVysSPEEemiuM_tO8e5iw" name="rateDivisor : EBigDecimal" tooltipText="">
-        <target xmi:type="ecore:EAttribute" href="measure.ecore#//Measure/rateDivisor"/>
-        <semanticElements xmi:type="ecore:EAttribute" href="measure.ecore#//Measure/rateDivisor"/>
-        <ownedStyle xmi:type="diagram:BundledImage" xmi:id="_6mWZwCPEEemiuM_tO8e5iw" labelAlignment="LEFT" description="_6mUkkCPEEemiuM_tO8e5iw">
-          <labelFormat>bold</labelFormat>
-        </ownedStyle>
-        <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='EC%20EAttribute']"/>
-      </ownedElements>
     </ownedDiagramElements>
     <ownedDiagramElements xmi:type="diagram:DNodeList" xmi:id="_6mHJMCPEEemiuM_tO8e5iw" name="Unit" tooltipText="" incomingEdges="_6mdugCPEEemiuM_tO8e5iw _6mjOEyPEEemiuM_tO8e5iw" width="12" height="10">
       <target xmi:type="ecore:EClass" href="measure.ecore#//Unit"/>
@@ -316,6 +300,22 @@
         <target xmi:type="ecore:EAttribute" href="measure.ecore#//Unit/name"/>
         <semanticElements xmi:type="ecore:EAttribute" href="measure.ecore#//Unit/name"/>
         <ownedStyle xmi:type="diagram:BundledImage" xmi:id="_6mYO8CPEEemiuM_tO8e5iw" labelAlignment="LEFT" description="_6mUkkCPEEemiuM_tO8e5iw">
+          <labelFormat>bold</labelFormat>
+        </ownedStyle>
+        <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='EC%20EAttribute']"/>
+      </ownedElements>
+      <ownedElements xmi:type="diagram:DNodeListElement" xmi:id="_GMLeUCPOEemLpvUY7MQgng" name="rateDividend : EBigDecimal" tooltipText="">
+        <target xmi:type="ecore:EAttribute" href="measure.ecore#//Unit/rateDividend"/>
+        <semanticElements xmi:type="ecore:EAttribute" href="measure.ecore#//Unit/rateDividend"/>
+        <ownedStyle xmi:type="diagram:BundledImage" xmi:id="_GMNTgCPOEemLpvUY7MQgng" labelAlignment="LEFT" description="_6mUkkCPEEemiuM_tO8e5iw">
+          <labelFormat>bold</labelFormat>
+        </ownedStyle>
+        <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='EC%20EAttribute']"/>
+      </ownedElements>
+      <ownedElements xmi:type="diagram:DNodeListElement" xmi:id="_GMOhoCPOEemLpvUY7MQgng" name="rateDivisor : EBigDecimal" tooltipText="">
+        <target xmi:type="ecore:EAttribute" href="measure.ecore#//Unit/rateDivisor"/>
+        <semanticElements xmi:type="ecore:EAttribute" href="measure.ecore#//Unit/rateDivisor"/>
+        <ownedStyle xmi:type="diagram:BundledImage" xmi:id="_GMPvwCPOEemLpvUY7MQgng" labelAlignment="LEFT" description="_6mUkkCPEEemiuM_tO8e5iw">
           <labelFormat>bold</labelFormat>
         </ownedStyle>
         <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@subNodeMappings[name='EC%20EAttribute']"/>
@@ -461,6 +461,7 @@
       <ownedStyle xmi:type="diagram:EdgeStyle" xmi:id="_6mfjsyPEEemiuM_tO8e5iw" description="_6mfjsCPEEemiuM_tO8e5iw" sourceArrow="FillDiamond" routingStyle="manhattan" strokeColor="0,0,0">
         <centerLabelStyle xmi:type="diagram:CenterLabelStyle" xmi:id="_6mfjtCPEEemiuM_tO8e5iw" showIcon="false">
           <customFeatures>labelSize</customFeatures>
+          <labelFormat>bold</labelFormat>
         </centerLabelStyle>
         <endLabelStyle xmi:type="diagram:EndLabelStyle" xmi:id="_6mfjtSPEEemiuM_tO8e5iw" showIcon="false" labelColor="39,76,114">
           <customFeatures>labelSize</customFeatures>
@@ -474,6 +475,7 @@
       <ownedStyle xmi:type="diagram:EdgeStyle" xmi:id="_6mgKwyPEEemiuM_tO8e5iw" description="_6mgKwCPEEemiuM_tO8e5iw" routingStyle="manhattan" strokeColor="0,0,0">
         <centerLabelStyle xmi:type="diagram:CenterLabelStyle" xmi:id="_6mgKxCPEEemiuM_tO8e5iw" showIcon="false">
           <customFeatures>labelSize</customFeatures>
+          <labelFormat>bold</labelFormat>
         </centerLabelStyle>
         <endLabelStyle xmi:type="diagram:EndLabelStyle" xmi:id="_6mgKxSPEEemiuM_tO8e5iw" showIcon="false" labelColor="39,76,114">
           <customFeatures>labelSize</customFeatures>
