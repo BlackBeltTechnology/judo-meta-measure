@@ -6,13 +6,14 @@ import hu.blackbelt.judo.meta.measure.BaseMeasureTerm;
 import hu.blackbelt.judo.meta.measure.DerivedMeasure;
 import hu.blackbelt.judo.meta.measure.MeasurePackage;
 
-import org.eclipse.emf.common.notify.Notification;
+import java.util.Collection;
 import org.eclipse.emf.common.notify.NotificationChain;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
@@ -29,14 +30,14 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  */
 public class DerivedMeasureImpl extends MeasureImpl implements DerivedMeasure {
 	/**
-	 * The cached value of the '{@link #getTerms() <em>Terms</em>}' containment reference.
+	 * The cached value of the '{@link #getTerms() <em>Terms</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getTerms()
 	 * @generated
 	 * @ordered
 	 */
-	protected BaseMeasureTerm terms;
+	protected EList<BaseMeasureTerm> terms;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -62,42 +63,11 @@ public class DerivedMeasureImpl extends MeasureImpl implements DerivedMeasure {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public BaseMeasureTerm getTerms() {
+	public EList<BaseMeasureTerm> getTerms() {
+		if (terms == null) {
+			terms = new EObjectContainmentEList<BaseMeasureTerm>(BaseMeasureTerm.class, this, MeasurePackage.DERIVED_MEASURE__TERMS);
+		}
 		return terms;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetTerms(BaseMeasureTerm newTerms, NotificationChain msgs) {
-		BaseMeasureTerm oldTerms = terms;
-		terms = newTerms;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, MeasurePackage.DERIVED_MEASURE__TERMS, oldTerms, newTerms);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setTerms(BaseMeasureTerm newTerms) {
-		if (newTerms != terms) {
-			NotificationChain msgs = null;
-			if (terms != null)
-				msgs = ((InternalEObject)terms).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - MeasurePackage.DERIVED_MEASURE__TERMS, null, msgs);
-			if (newTerms != null)
-				msgs = ((InternalEObject)newTerms).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - MeasurePackage.DERIVED_MEASURE__TERMS, null, msgs);
-			msgs = basicSetTerms(newTerms, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, MeasurePackage.DERIVED_MEASURE__TERMS, newTerms, newTerms));
 	}
 
 	/**
@@ -109,7 +79,7 @@ public class DerivedMeasureImpl extends MeasureImpl implements DerivedMeasure {
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case MeasurePackage.DERIVED_MEASURE__TERMS:
-				return basicSetTerms(null, msgs);
+				return ((InternalEList<?>)getTerms()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -133,11 +103,13 @@ public class DerivedMeasureImpl extends MeasureImpl implements DerivedMeasure {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case MeasurePackage.DERIVED_MEASURE__TERMS:
-				setTerms((BaseMeasureTerm)newValue);
+				getTerms().clear();
+				getTerms().addAll((Collection<? extends BaseMeasureTerm>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -152,7 +124,7 @@ public class DerivedMeasureImpl extends MeasureImpl implements DerivedMeasure {
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case MeasurePackage.DERIVED_MEASURE__TERMS:
-				setTerms((BaseMeasureTerm)null);
+				getTerms().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -167,7 +139,7 @@ public class DerivedMeasureImpl extends MeasureImpl implements DerivedMeasure {
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case MeasurePackage.DERIVED_MEASURE__TERMS:
-				return terms != null;
+				return terms != null && !terms.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

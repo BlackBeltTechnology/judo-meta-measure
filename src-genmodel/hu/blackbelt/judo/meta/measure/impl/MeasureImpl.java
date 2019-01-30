@@ -31,6 +31,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <ul>
  *   <li>{@link hu.blackbelt.judo.meta.measure.impl.MeasureImpl#getNamespace <em>Namespace</em>}</li>
  *   <li>{@link hu.blackbelt.judo.meta.measure.impl.MeasureImpl#getName <em>Name</em>}</li>
+ *   <li>{@link hu.blackbelt.judo.meta.measure.impl.MeasureImpl#getSymbol <em>Symbol</em>}</li>
  *   <li>{@link hu.blackbelt.judo.meta.measure.impl.MeasureImpl#getUnits <em>Units</em>}</li>
  * </ul>
  *
@@ -76,6 +77,26 @@ public abstract class MeasureImpl extends MinimalEObjectImpl.Container implement
 	 * @ordered
 	 */
 	protected String name = NAME_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getSymbol() <em>Symbol</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSymbol()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String SYMBOL_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getSymbol() <em>Symbol</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSymbol()
+	 * @generated
+	 * @ordered
+	 */
+	protected String symbol = SYMBOL_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getUnits() <em>Units</em>}' containment reference list.
@@ -153,6 +174,27 @@ public abstract class MeasureImpl extends MinimalEObjectImpl.Container implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getSymbol() {
+		return symbol;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setSymbol(String newSymbol) {
+		String oldSymbol = symbol;
+		symbol = newSymbol;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, MeasurePackage.MEASURE__SYMBOL, oldSymbol, symbol));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EList<Unit> getUnits() {
 		if (units == null) {
 			units = new EObjectContainmentEList<Unit>(Unit.class, this, MeasurePackage.MEASURE__UNITS);
@@ -186,6 +228,8 @@ public abstract class MeasureImpl extends MinimalEObjectImpl.Container implement
 				return getNamespace();
 			case MeasurePackage.MEASURE__NAME:
 				return getName();
+			case MeasurePackage.MEASURE__SYMBOL:
+				return getSymbol();
 			case MeasurePackage.MEASURE__UNITS:
 				return getUnits();
 		}
@@ -206,6 +250,9 @@ public abstract class MeasureImpl extends MinimalEObjectImpl.Container implement
 				return;
 			case MeasurePackage.MEASURE__NAME:
 				setName((String)newValue);
+				return;
+			case MeasurePackage.MEASURE__SYMBOL:
+				setSymbol((String)newValue);
 				return;
 			case MeasurePackage.MEASURE__UNITS:
 				getUnits().clear();
@@ -229,6 +276,9 @@ public abstract class MeasureImpl extends MinimalEObjectImpl.Container implement
 			case MeasurePackage.MEASURE__NAME:
 				setName(NAME_EDEFAULT);
 				return;
+			case MeasurePackage.MEASURE__SYMBOL:
+				setSymbol(SYMBOL_EDEFAULT);
+				return;
 			case MeasurePackage.MEASURE__UNITS:
 				getUnits().clear();
 				return;
@@ -248,6 +298,8 @@ public abstract class MeasureImpl extends MinimalEObjectImpl.Container implement
 				return NAMESPACE_EDEFAULT == null ? namespace != null : !NAMESPACE_EDEFAULT.equals(namespace);
 			case MeasurePackage.MEASURE__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case MeasurePackage.MEASURE__SYMBOL:
+				return SYMBOL_EDEFAULT == null ? symbol != null : !SYMBOL_EDEFAULT.equals(symbol);
 			case MeasurePackage.MEASURE__UNITS:
 				return units != null && !units.isEmpty();
 		}
@@ -268,6 +320,8 @@ public abstract class MeasureImpl extends MinimalEObjectImpl.Container implement
 		result.append(namespace);
 		result.append(", name: ");
 		result.append(name);
+		result.append(", symbol: ");
+		result.append(symbol);
 		result.append(')');
 		return result.toString();
 	}

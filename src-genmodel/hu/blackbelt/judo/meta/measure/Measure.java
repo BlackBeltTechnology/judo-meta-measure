@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.EObject;
  * <ul>
  *   <li>{@link hu.blackbelt.judo.meta.measure.Measure#getNamespace <em>Namespace</em>}</li>
  *   <li>{@link hu.blackbelt.judo.meta.measure.Measure#getName <em>Name</em>}</li>
+ *   <li>{@link hu.blackbelt.judo.meta.measure.Measure#getSymbol <em>Symbol</em>}</li>
  *   <li>{@link hu.blackbelt.judo.meta.measure.Measure#getUnits <em>Units</em>}</li>
  * </ul>
  *
@@ -76,6 +77,32 @@ public interface Measure extends EObject {
 	 * @generated
 	 */
 	void setName(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Symbol</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Symbol</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Symbol</em>' attribute.
+	 * @see #setSymbol(String)
+	 * @see hu.blackbelt.judo.meta.measure.MeasurePackage#getMeasure_Symbol()
+	 * @model
+	 * @generated
+	 */
+	String getSymbol();
+
+	/**
+	 * Sets the value of the '{@link hu.blackbelt.judo.meta.measure.Measure#getSymbol <em>Symbol</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Symbol</em>' attribute.
+	 * @see #getSymbol()
+	 * @generated
+	 */
+	void setSymbol(String value);
 
 	/**
 	 * Returns the value of the '<em><b>Units</b></em>' containment reference list.

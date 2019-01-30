@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  * </p>
  * <ul>
  *   <li>{@link hu.blackbelt.judo.meta.measure.impl.UnitImpl#getName <em>Name</em>}</li>
+ *   <li>{@link hu.blackbelt.judo.meta.measure.impl.UnitImpl#getSymbol <em>Symbol</em>}</li>
  *   <li>{@link hu.blackbelt.judo.meta.measure.impl.UnitImpl#getRateDividend <em>Rate Dividend</em>}</li>
  *   <li>{@link hu.blackbelt.judo.meta.measure.impl.UnitImpl#getRateDivisor <em>Rate Divisor</em>}</li>
  * </ul>
@@ -48,6 +49,26 @@ public class UnitImpl extends MinimalEObjectImpl.Container implements Unit {
 	 * @ordered
 	 */
 	protected String name = NAME_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getSymbol() <em>Symbol</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSymbol()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String SYMBOL_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getSymbol() <em>Symbol</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSymbol()
+	 * @generated
+	 * @ordered
+	 */
+	protected String symbol = SYMBOL_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getRateDividend() <em>Rate Dividend</em>}' attribute.
@@ -134,6 +155,27 @@ public class UnitImpl extends MinimalEObjectImpl.Container implements Unit {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getSymbol() {
+		return symbol;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setSymbol(String newSymbol) {
+		String oldSymbol = symbol;
+		symbol = newSymbol;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, MeasurePackage.UNIT__SYMBOL, oldSymbol, symbol));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public BigDecimal getRateDividend() {
 		return rateDividend;
 	}
@@ -181,6 +223,8 @@ public class UnitImpl extends MinimalEObjectImpl.Container implements Unit {
 		switch (featureID) {
 			case MeasurePackage.UNIT__NAME:
 				return getName();
+			case MeasurePackage.UNIT__SYMBOL:
+				return getSymbol();
 			case MeasurePackage.UNIT__RATE_DIVIDEND:
 				return getRateDividend();
 			case MeasurePackage.UNIT__RATE_DIVISOR:
@@ -199,6 +243,9 @@ public class UnitImpl extends MinimalEObjectImpl.Container implements Unit {
 		switch (featureID) {
 			case MeasurePackage.UNIT__NAME:
 				setName((String)newValue);
+				return;
+			case MeasurePackage.UNIT__SYMBOL:
+				setSymbol((String)newValue);
 				return;
 			case MeasurePackage.UNIT__RATE_DIVIDEND:
 				setRateDividend((BigDecimal)newValue);
@@ -221,6 +268,9 @@ public class UnitImpl extends MinimalEObjectImpl.Container implements Unit {
 			case MeasurePackage.UNIT__NAME:
 				setName(NAME_EDEFAULT);
 				return;
+			case MeasurePackage.UNIT__SYMBOL:
+				setSymbol(SYMBOL_EDEFAULT);
+				return;
 			case MeasurePackage.UNIT__RATE_DIVIDEND:
 				setRateDividend(RATE_DIVIDEND_EDEFAULT);
 				return;
@@ -241,6 +291,8 @@ public class UnitImpl extends MinimalEObjectImpl.Container implements Unit {
 		switch (featureID) {
 			case MeasurePackage.UNIT__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case MeasurePackage.UNIT__SYMBOL:
+				return SYMBOL_EDEFAULT == null ? symbol != null : !SYMBOL_EDEFAULT.equals(symbol);
 			case MeasurePackage.UNIT__RATE_DIVIDEND:
 				return RATE_DIVIDEND_EDEFAULT == null ? rateDividend != null : !RATE_DIVIDEND_EDEFAULT.equals(rateDividend);
 			case MeasurePackage.UNIT__RATE_DIVISOR:
@@ -261,6 +313,8 @@ public class UnitImpl extends MinimalEObjectImpl.Container implements Unit {
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (name: ");
 		result.append(name);
+		result.append(", symbol: ");
+		result.append(symbol);
 		result.append(", rateDividend: ");
 		result.append(rateDividend);
 		result.append(", rateDivisor: ");

@@ -169,8 +169,17 @@ public class MeasurePackageImpl extends EPackageImpl implements MeasurePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getMeasure_Symbol() {
+		return (EAttribute)measureEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EReference getMeasure_Units() {
-		return (EReference)measureEClass.getEStructuralFeatures().get(2);
+		return (EReference)measureEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -196,7 +205,7 @@ public class MeasurePackageImpl extends EPackageImpl implements MeasurePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getUnit_RateDividend() {
+	public EAttribute getUnit_Symbol() {
 		return (EAttribute)unitEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -205,8 +214,17 @@ public class MeasurePackageImpl extends EPackageImpl implements MeasurePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getUnit_RateDivisor() {
+	public EAttribute getUnit_RateDividend() {
 		return (EAttribute)unitEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getUnit_RateDivisor() {
+		return (EAttribute)unitEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -321,10 +339,12 @@ public class MeasurePackageImpl extends EPackageImpl implements MeasurePackage {
 		measureEClass = createEClass(MEASURE);
 		createEAttribute(measureEClass, MEASURE__NAMESPACE);
 		createEAttribute(measureEClass, MEASURE__NAME);
+		createEAttribute(measureEClass, MEASURE__SYMBOL);
 		createEReference(measureEClass, MEASURE__UNITS);
 
 		unitEClass = createEClass(UNIT);
 		createEAttribute(unitEClass, UNIT__NAME);
+		createEAttribute(unitEClass, UNIT__SYMBOL);
 		createEAttribute(unitEClass, UNIT__RATE_DIVIDEND);
 		createEAttribute(unitEClass, UNIT__RATE_DIVISOR);
 
@@ -380,15 +400,17 @@ public class MeasurePackageImpl extends EPackageImpl implements MeasurePackage {
 		initEClass(measureEClass, Measure.class, "Measure", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getMeasure_Namespace(), ecorePackage.getEString(), "namespace", null, 1, 1, Measure.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getMeasure_Name(), ecorePackage.getEString(), "name", null, 1, 1, Measure.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMeasure_Symbol(), ecorePackage.getEString(), "symbol", null, 0, 1, Measure.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMeasure_Units(), this.getUnit(), null, "units", null, 0, -1, Measure.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(unitEClass, Unit.class, "Unit", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getUnit_Name(), ecorePackage.getEString(), "name", null, 1, 1, Unit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getUnit_Symbol(), ecorePackage.getEString(), "symbol", null, 0, 1, Unit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getUnit_RateDividend(), ecorePackage.getEBigDecimal(), "rateDividend", null, 1, 1, Unit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getUnit_RateDivisor(), ecorePackage.getEBigDecimal(), "rateDivisor", null, 1, 1, Unit.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(derivedMeasureEClass, DerivedMeasure.class, "DerivedMeasure", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getDerivedMeasure_Terms(), this.getBaseMeasureTerm(), null, "terms", null, 1, 1, DerivedMeasure.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getDerivedMeasure_Terms(), this.getBaseMeasureTerm(), null, "terms", null, 1, -1, DerivedMeasure.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(baseMeasureEClass, BaseMeasure.class, "BaseMeasure", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
