@@ -62,7 +62,7 @@
     </modules>
     
     <properties>
-        <project-repositoryId>BlackBeltTechnology/judo-meta-expression</project-repositoryId>
+        <project-repositoryId>BlackBeltTechnology/judo-meta-measure</project-repositoryId>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <timestamp>${maven.build.timestamp}</timestamp>
         <maven.build.timestamp.format>yyyyMMddHHmmss</maven.build.timestamp.format>
