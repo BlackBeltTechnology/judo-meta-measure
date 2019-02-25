@@ -1,0 +1,8 @@
+module GeneratorBuilder
+
+Workflow {
+ component = hu.blackbelt.emfbuildergenerator.EMFBuilderGenerator {
+  ecoreURI = "platform:/resource/judo-meta-measure-model/model/measure.ecore"
+  genModelUri = "platform:/resource/judo-meta-measure-model/model/measure.genmodel"       
+ }
+}
