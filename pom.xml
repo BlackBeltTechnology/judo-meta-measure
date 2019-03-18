@@ -63,6 +63,7 @@
         <epsilon-maven-plugin-version>1.2.0_feature__10_FixingXsdXmlModelLoading-59</epsilon-maven-plugin-version>
 
         <src.dir>src/main</src.dir>
+
         
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
