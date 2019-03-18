@@ -11,7 +11,7 @@
         <relativePath>..</relativePath>
     </parent>
     <artifactId>judo-meta-measure-generator</artifactId>
-    <packaging>pom</packaging>
+    <packaging>eclipse-plugin</packaging>
     
     <name>JUDO measure metamodel eclipse source generator</name>
     <description>Judo Architecture Specific Measure Metamodel Source Generator</description>
@@ -27,7 +27,7 @@
                 <configuration>
                     <filesets combine.children="append">
                         <fileset>
-                            <directory>${basedir}/../model/gen-src</directory>
+                            <directory>${basedir}/../model/src-genmodel</directory>
                             <includes>
                                 <include>**/*</include>
                             </includes>
@@ -70,6 +70,13 @@
                         <phase>generate-sources</phase>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.fornax.toolsupport</groupId>
+                <artifactId>fornax-oaw-m2-plugin</artifactId>
+                <configuration>
+                    <workflowDescriptor>src/workflows/GenerateBuilder.mwe2</workflowDescriptor>
+                </configuration>
             </plugin>
         </plugins>
     </build>
