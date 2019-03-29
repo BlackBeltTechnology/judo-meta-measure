@@ -16,12 +16,12 @@ class MeasureModelLoaderTest {
 
     @Test
     void loadMeasureModel() throws IOException {
-        MeasureModel psmModel = MeasureModelLoader.loadMeasureModel(
+        MeasureModel measureModel = MeasureModelLoader.loadMeasureModel(
                 URI.createURI(new File(srcDir(), "test/models/northwind-measure.model").getAbsolutePath()),
                 "test",
                 "1.0.0");
 
-        for (Iterator<EObject> i = psmModel.getResource().getAllContents(); i.hasNext(); ) {
+        for (Iterator<EObject> i = measureModel.getResourceSet().getResource(measureModel.getUri(), false).getAllContents(); i.hasNext(); ) {
             log.info(i.next().toString());
         }
     }

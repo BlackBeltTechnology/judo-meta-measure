@@ -49,7 +49,7 @@ class ExecutionContextTest {
                         wrappedEmfModelContextBuilder()
                                 .log(log)
                                 .name("JUDOPSM")
-                                .resource(measureResource)
+                                .resourceSet(measureResource)
                                 .build()))
                 .sourceDirectory(scriptDir())
                 .build();
