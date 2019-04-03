@@ -9,6 +9,7 @@ import org.eclipse.emf.ecore.resource.URIHandler;
 import org.eclipse.emf.ecore.resource.impl.ResourceFactoryRegistryImpl;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.XMLResource;
+import org.eclipse.emf.ecore.xmi.impl.URIHandlerImpl;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -76,5 +77,26 @@ public class MeasureModelLoader {
         }
         return b.build();
     }
+
+    public static Map<Object, Object> getMeasureModelDefaultSaveOptions() {
+        Map<Object, Object> saveOptions = new HashMap<>();
+        saveOptions.put("DECLARE_XML", Boolean.TRUE);
+        saveOptions.put("PROCESS_DANGLING_HREF", "DISCARD");
+        saveOptions.put("URI_HANDLER", new URIHandlerImpl() {
+            public URI deresolve(URI uri) {
+                return uri.hasFragment() && uri.hasOpaquePart() && this.baseURI.hasOpaquePart() && uri.opaquePart().equals(this.baseURI.opaquePart()) ? URI.createURI("#" + uri.fragment()) : super.deresolve(uri);
+            }
+        });
+        saveOptions.put("SCHEMA_LOCATION", Boolean.TRUE);
+        saveOptions.put("DEFER_IDREF_RESOLUTION", Boolean.TRUE);
+        saveOptions.put("SKIP_ESCAPE_URI", Boolean.FALSE);
+        saveOptions.put("ENCODING", "UTF-8");
+        return saveOptions;
+    }
+
+    public static void saveMeasuresModel(MeasureModel measureModel) throws IOException {
+        measureModel.getResourceSet().getResource(measureModel.getUri(), false).save(getMeasureModelDefaultSaveOptions());
+    }
+
 
 }
