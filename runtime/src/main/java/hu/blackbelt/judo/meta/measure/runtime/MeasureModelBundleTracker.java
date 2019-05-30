@@ -82,8 +82,6 @@ public class MeasureModelBundleTracker {
                                 File file = BundleUtil.copyBundleFileToPersistentStorage(trackedBundle, key + ".judo-meta-measure", params.get("file"));
                                 Version version = bundleContext.getBundle().getVersion();
 
-                                // TODO: JNG-55 Copy mapping XLSX
-
                                 MeasureModel measureModel = loadMeasureModel(
                                         new ResourceSetImpl(),
                                         URI.createURI(file.getAbsolutePath()),
