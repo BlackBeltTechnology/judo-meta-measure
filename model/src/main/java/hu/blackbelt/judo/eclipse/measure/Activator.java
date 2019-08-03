@@ -1,4 +1,4 @@
-package hu.blackbelt.judo.meta.measure.runtime;
+package hu.blackbelt.judo.eclipse.measure;
 
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;

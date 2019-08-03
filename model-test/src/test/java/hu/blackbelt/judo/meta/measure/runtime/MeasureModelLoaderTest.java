@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.util.Iterator;
 import java.util.Optional;
 
-import static hu.blackbelt.judo.meta.measure.runtime.MeasureModel.LoadArguments.loadArgumentsBuilder;
+import static hu.blackbelt.judo.meta.measure.runtime.MeasureModel.LoadArguments.measureLoadArgumentsBuilder;
 
 public class MeasureModelLoaderTest {
 
@@ -26,8 +26,8 @@ public class MeasureModelLoaderTest {
     void loadMeasureModel() throws IOException {
         ResourceSet measureResourceSet = MeasureModelResourceSupport.createMeasureResourceSet();
 
-        MeasureModel measureModel = MeasureModel.loadMeasureModel(loadArgumentsBuilder()
-                .resourceSet(Optional.of(measureResourceSet))
+        MeasureModel measureModel = MeasureModel.loadMeasureModel(measureLoadArgumentsBuilder()
+                .resourceSet(measureResourceSet)
                 .uri(URI.createFileURI(new File("src/test/model/test.measure").getAbsolutePath()))
                 .name("test")
                 .build());

@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 import static hu.blackbelt.judo.meta.measure.support.MeasureModelResourceSupport.measureModelResourceSupportBuilder;
 import static hu.blackbelt.judo.meta.measure.util.builder.MeasureBuilders.*;
 
-class ExecutionContextTest {
+class MeasureExecutionContextTest {
 
     @Test
     @DisplayName("Create Measure model with builder pattern")

@@ -1,6 +1,7 @@
 package hu.blackbelt.judo.meta.measure.osgi;
 
 import hu.blackbelt.epsilon.runtime.osgi.BundleURIHandler;
+import hu.blackbelt.judo.meta.measure.Measure;
 import hu.blackbelt.judo.meta.measure.runtime.MeasureModel;
 import hu.blackbelt.osgi.utils.osgi.api.BundleCallback;
 import hu.blackbelt.osgi.utils.osgi.api.BundleTrackerManager;
@@ -83,15 +84,13 @@ public class MeasureModelBundleTracker {
                             // Unpack model
                             try {
                                         MeasureModel measureModel = MeasureModel.loadMeasureModel(
-                                        MeasureModel.LoadArguments.loadArgumentsBuilder()
-                                                .uriHandler(Optional.of(new BundleURIHandler("urn", "", trackedBundle)))
-                                                .uri(URI.createURI(params.get("file")))
+                                        MeasureModel.LoadArguments.measureLoadArgumentsBuilder()
+                                                .uriHandler(new BundleURIHandler(trackedBundle.getSymbolicName(), "", trackedBundle))
+                                                .uri(URI.createURI(trackedBundle.getSymbolicName() + ":" + params.get("file")))
                                                 .name(params.get(MeasureModel.NAME))
-                                                .version(Optional.of(trackedBundle.getVersion().toString()))
-                                                .checksum(Optional.ofNullable(params.get(MeasureModel.CHECKSUM)))
-                                                .acceptedMetaVersionRange(Optional.of(versionRange.toString()))
-                                                .build()
-                                );
+                                                .version(trackedBundle.getVersion().toString())
+                                                .checksum(Optional.ofNullable(params.get(MeasureModel.CHECKSUM)).orElse("notset"))
+                                                .acceptedMetaVersionRange(Optional.of(versionRange.toString()).orElse("[0,99)")));
 
                                 log.info("Registering Measure model: " + measureModel);
 
