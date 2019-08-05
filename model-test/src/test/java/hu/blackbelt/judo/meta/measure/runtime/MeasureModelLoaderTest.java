@@ -23,7 +23,7 @@ public class MeasureModelLoaderTest {
 	
     @Test
     @DisplayName("Load Measure Model")
-    void loadMeasureModel() throws IOException {
+    void loadMeasureModel() throws IOException, MeasureModel.MeasureValidationException {
         ResourceSet measureResourceSet = MeasureModelResourceSupport.createMeasureResourceSet();
 
         MeasureModel measureModel = MeasureModel.loadMeasureModel(measureLoadArgumentsBuilder()

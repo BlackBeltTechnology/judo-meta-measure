@@ -29,7 +29,6 @@ public class MeasureValidationTest {
 
     private static final Logger log = LoggerFactory.getLogger(MeasureValidationTest.class);
     private final String createdSourceModelName = "urn:Measure.model";
-    private Resource measureResource;
     private ExecutionContext executionContext;
     MeasureModelResourceSupport measureModelSupport;
 
@@ -38,13 +37,13 @@ public class MeasureValidationTest {
     @BeforeEach
     void setUp() {
 
-        measureModelSupport = measureModelResourceSupportBuilder().build();
-        measureResource = measureModelSupport.getResourceSet().createResource(
-                URI.createFileURI(createdSourceModelName));
+        measureModelSupport = measureModelResourceSupportBuilder()
+                .uri(URI.createFileURI(createdSourceModelName))
+                .build();
 
         Log log = new Slf4jLog();
 
-        measureUtils = new MeasureUtils(measureResource.getResourceSet(), false);
+        measureUtils = new MeasureUtils(measureModelSupport.getResourceSet(), false);
 
         // Execution context
         executionContext = executionContextBuilder()
@@ -55,16 +54,10 @@ public class MeasureValidationTest {
                         wrappedEmfModelContextBuilder()
                                 .log(log)
                                 .name("MEASURE")
-                                .resource(measureResource)
+                                .resource(measureModelSupport.getResource())
                                 .build()))
                 .injectContexts(ImmutableMap.of("measureUtils", measureUtils))
                 .build();
-    }
-
-    @AfterEach
-    void tearDown() {
-        executionContext = null;
-        measureResource = null;
     }
 
     @Test

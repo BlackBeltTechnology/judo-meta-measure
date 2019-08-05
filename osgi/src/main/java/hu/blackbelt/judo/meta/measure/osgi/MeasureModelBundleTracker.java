@@ -100,8 +100,9 @@ public class MeasureModelBundleTracker {
 
                             } catch (IOException e) {
                                 log.error("Could not load Measure model: " + params.get(MeasureModel.NAME) + " from bundle: " + trackedBundle.getBundleId());
-                            }
-                        }
+                            } catch (MeasureModel.MeasureValidationException e) {
+                                log.error("Could not load Measure model: " + params.get(MeasureModel.NAME) + " from bundle: " + trackedBundle.getBundleId(), e);
+                            }                        }
                     }
                 }
             }
