@@ -1,13 +1,10 @@
 package hu.blackbelt.judo.meta.measure.osgi;
 
-import hu.blackbelt.epsilon.runtime.osgi.BundleURIHandler;
-import hu.blackbelt.judo.meta.measure.Measure;
 import hu.blackbelt.judo.meta.measure.runtime.MeasureModel;
 import hu.blackbelt.osgi.utils.osgi.api.BundleCallback;
 import hu.blackbelt.osgi.utils.osgi.api.BundleTrackerManager;
 import hu.blackbelt.osgi.utils.osgi.api.BundleUtil;
 import lombok.extern.slf4j.Slf4j;
-import org.eclipse.emf.common.util.URI;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceRegistration;
@@ -17,6 +14,9 @@ import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Deactivate;
 import org.osgi.service.component.annotations.Reference;
+import org.osgi.service.metatype.annotations.AttributeDefinition;
+import org.osgi.service.metatype.annotations.Designate;
+import org.osgi.service.metatype.annotations.ObjectClassDefinition;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -25,12 +25,26 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import static java.util.Optional.ofNullable;
 
 @Component(immediate = true)
 @Slf4j
+@Designate(ocd = MeasureModelBundleTracker.TrackerConfig.class)
 public class MeasureModelBundleTracker {
 
     public static final String MEASURE_MODELS = "Measure-Models";
+
+    @ObjectClassDefinition(name="Measure Model Bundle Tracker")
+    public @interface TrackerConfig {
+        @AttributeDefinition(
+                name = "Tags",
+                description = "Which tags are on the loaded model when there is no one defined in bundle"
+        )
+        String tags() default "";
+    }
 
     @Reference
     BundleTrackerManager bundleTrackerManager;
@@ -39,8 +53,11 @@ public class MeasureModelBundleTracker {
 
     Map<String, MeasureModel> measureModels = new HashMap<>();
 
+    TrackerConfig config;
+
     @Activate
-    public void activate(final ComponentContext componentContext) {
+    public void activate(final ComponentContext componentContext, final TrackerConfig trackerConfig) {
+        this.config = trackerConfig;
         bundleTrackerManager.registerBundleCallback(this.getClass().getName(),
                 new MeasureRegisterCallback(componentContext.getBundleContext()),
                 new MeasureUnregisterCallback(),
@@ -85,11 +102,11 @@ public class MeasureModelBundleTracker {
                             try {
                                         MeasureModel measureModel = MeasureModel.loadMeasureModel(
                                         MeasureModel.LoadArguments.measureLoadArgumentsBuilder()
-                                                .uriHandler(new BundleURIHandler(trackedBundle.getSymbolicName(), "", trackedBundle))
-                                                .uri(URI.createURI(trackedBundle.getSymbolicName() + ":" + params.get("file")))
+                                                .inputStream(trackedBundle.getEntry(params.get("file")).openStream())
                                                 .name(params.get(MeasureModel.NAME))
                                                 .version(trackedBundle.getVersion().toString())
                                                 .checksum(Optional.ofNullable(params.get(MeasureModel.CHECKSUM)).orElse("notset"))
+                                                .tags(Stream.of(ofNullable(params.get(MeasureModel.TAGS)).orElse(config.tags()).split(",")).collect(Collectors.toSet()))
                                                 .acceptedMetaVersionRange(Optional.of(versionRange.toString()).orElse("[0,99)")));
 
                                 log.info("Registering Measure model: " + measureModel);
@@ -98,11 +115,10 @@ public class MeasureModelBundleTracker {
                                 measureModels.put(key, measureModel);
                                 measureModelRegistrations.put(key, modelServiceRegistration);
 
-                            } catch (IOException e) {
-                                log.error("Could not load Measure model: " + params.get(MeasureModel.NAME) + " from bundle: " + trackedBundle.getBundleId());
-                            } catch (MeasureModel.MeasureValidationException e) {
-                                log.error("Could not load Measure model: " + params.get(MeasureModel.NAME) + " from bundle: " + trackedBundle.getBundleId(), e);
-                            }                        }
+                            } catch (IOException | MeasureModel.MeasureValidationException e) {
+                                log.error("Could not load Psm model: " + params.get(MeasureModel.NAME) + " from bundle: " + trackedBundle.getBundleId(), e);
+                            }
+                        }
                     }
                 }
             }
