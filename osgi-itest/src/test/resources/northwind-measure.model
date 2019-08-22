@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:measure="http://blackbelt.hu/judo/meta/measure">
+  <measure:BaseMeasure xmi:id="_MC2kUMTQEem8IdSbv-_EoQ" namespace="demo::measures" name="Mass">
+    <units xmi:id="_MC9SAMTQEem8IdSbv-_EoQ" name="milligram" symbol="mg" rateDividend="0.0000010" rateDivisor="1.0"/>
+    <units xmi:id="_MC9SAcTQEem8IdSbv-_EoQ" name="gram" symbol="g" rateDividend="0.001" rateDivisor="1.0"/>
+    <units xmi:id="_MC9SAsTQEem8IdSbv-_EoQ" name="dekagram" symbol="dkg" rateDividend="0.01" rateDivisor="1.0"/>
+    <units xmi:id="_MC95EMTQEem8IdSbv-_EoQ" name="kilogram" symbol="kg" rateDividend="1.0" rateDivisor="1.0"/>
+    <units xmi:id="_MC95EcTQEem8IdSbv-_EoQ" name="quintal" symbol="q" rateDividend="100.0" rateDivisor="1.0"/>
+    <units xmi:id="_MC95EsTQEem8IdSbv-_EoQ" name="tonne" symbol="t" rateDividend="1000.0" rateDivisor="1.0"/>
+  </measure:BaseMeasure>
+  <measure:BaseMeasure xmi:id="_MC3ycMTQEem8IdSbv-_EoQ" namespace="demo::measures" name="Time">
+    <units xsi:type="measure:DurationUnit" xmi:id="_MDCxkMTQEem8IdSbv-_EoQ" name="millisecond" symbol="ms" rateDividend="0.001" rateDivisor="1.0"/>
+    <units xsi:type="measure:DurationUnit" xmi:id="_MDCxkcTQEem8IdSbv-_EoQ" name="second" symbol="s" rateDividend="1.0" rateDivisor="1.0" type="second"/>
+    <units xsi:type="measure:DurationUnit" xmi:id="_MDCxksTQEem8IdSbv-_EoQ" name="minute" symbol="min" rateDividend="60.0" rateDivisor="1.0" type="minute"/>
+    <units xsi:type="measure:DurationUnit" xmi:id="_MDCxk8TQEem8IdSbv-_EoQ" name="hour" symbol="h" rateDividend="3600.0" rateDivisor="1.0" type="hour"/>
+    <units xsi:type="measure:DurationUnit" xmi:id="_MDCxlMTQEem8IdSbv-_EoQ" name="day" symbol="" rateDividend="86400.0" rateDivisor="1.0" type="day"/>
+    <units xsi:type="measure:DurationUnit" xmi:id="_MDCxlcTQEem8IdSbv-_EoQ" name="week" symbol="" rateDividend="604800.0" rateDivisor="1.0" type="week"/>
+  </measure:BaseMeasure>
+  <measure:BaseMeasure xmi:id="_MC4ZgMTQEem8IdSbv-_EoQ" namespace="demo::measures" name="MonthBasedTime">
+    <units xsi:type="measure:DurationUnit" xmi:id="_MDCxlsTQEem8IdSbv-_EoQ" name="month" rateDividend="1.0" rateDivisor="1.0" type="month"/>
+    <units xsi:type="measure:DurationUnit" xmi:id="_MDCxl8TQEem8IdSbv-_EoQ" name="year" rateDividend="12.0" rateDivisor="1.0" type="year"/>
+  </measure:BaseMeasure>
+  <measure:BaseMeasure xmi:id="_MC4ZgcTQEem8IdSbv-_EoQ" namespace="demo::measures" name="Length">
+    <units xmi:id="_MC95E8TQEem8IdSbv-_EoQ" name="nanometre" symbol="nm" rateDividend="1.0E-9" rateDivisor="1.0"/>
+    <units xmi:id="_MC95FMTQEem8IdSbv-_EoQ" name="micrometre" symbol="μm" rateDividend="0.0000010" rateDivisor="1.0"/>
+    <units xmi:id="_MC95FcTQEem8IdSbv-_EoQ" name="millimetre" symbol="mm" rateDividend="0.001" rateDivisor="1.0"/>
+    <units xmi:id="_MDAVUMTQEem8IdSbv-_EoQ" name="centimetre" symbol="cm" rateDividend="0.01" rateDivisor="1.0"/>
+    <units xmi:id="_MDAVUcTQEem8IdSbv-_EoQ" name="decimetre" symbol="dm" rateDividend="0.1" rateDivisor="1.0"/>
+    <units xmi:id="_MDAVUsTQEem8IdSbv-_EoQ" name="metre" symbol="m" rateDividend="1.0" rateDivisor="1.0"/>
+    <units xmi:id="_MDAVU8TQEem8IdSbv-_EoQ" name="kilometre" symbol="km" rateDividend="1000.0" rateDivisor="1.0"/>
+    <units xmi:id="_MDAVVMTQEem8IdSbv-_EoQ" name="inch" symbol="&quot;" rateDividend="0.0254" rateDivisor="1.0"/>
+    <units xmi:id="_MDAVVcTQEem8IdSbv-_EoQ" name="foot" symbol="ft" rateDividend="0.3048" rateDivisor="1.0"/>
+    <units xmi:id="_MDAVVsTQEem8IdSbv-_EoQ" name="mile" symbol="mi" rateDividend="1609.344" rateDivisor="1.0"/>
+  </measure:BaseMeasure>
+  <measure:BaseMeasure xmi:id="_MC5AkMTQEem8IdSbv-_EoQ" namespace="demo::measures" name="Temperature">
+    <units xmi:id="_MDA8YMTQEem8IdSbv-_EoQ" name="celsius" symbol="°C" rateDividend="1.0" rateDivisor="1.0"/>
+  </measure:BaseMeasure>
+  <measure:BaseMeasure xmi:id="_MC5AkcTQEem8IdSbv-_EoQ" namespace="demo::measures" name="ElectricCurrent">
+    <units xmi:id="_MDA8hcTQEem8IdSbv-_EoQ" name="milliampere" symbol="mA" rateDividend="0.001" rateDivisor="1.0"/>
+    <units xmi:id="_MDA8hsTQEem8IdSbv-_EoQ" name="ampere" symbol="A" rateDividend="1.0" rateDivisor="1.0"/>
+  </measure:BaseMeasure>
+  <measure:BaseMeasure xmi:id="_MC5noMTQEem8IdSbv-_EoQ" namespace="demo::measures" name="ThermodynamicTemperature">
+    <units xmi:id="_MDBjcMTQEem8IdSbv-_EoQ" name="kelvin" symbol="K" rateDividend="1.0" rateDivisor="1.0"/>
+  </measure:BaseMeasure>
+  <measure:BaseMeasure xmi:id="_MC5nocTQEem8IdSbv-_EoQ" namespace="demo::measures" name="AmountOfSubstance">
+    <units xmi:id="_MDBjccTQEem8IdSbv-_EoQ" name="mol" symbol="mol" rateDividend="1.0" rateDivisor="1.0"/>
+  </measure:BaseMeasure>
+  <measure:BaseMeasure xmi:id="_MC5nosTQEem8IdSbv-_EoQ" namespace="demo::measures" name="LuminousIntensity">
+    <units xmi:id="_MDBjcsTQEem8IdSbv-_EoQ" name="candela" symbol="cd" rateDividend="1.0" rateDivisor="1.0"/>
+  </measure:BaseMeasure>
+  <measure:DerivedMeasure xmi:id="_MC7c0MTQEem8IdSbv-_EoQ" namespace="demo::measures" name="Area">
+    <units xmi:id="_MDA8YcTQEem8IdSbv-_EoQ" name="squareMillimetre" symbol="mm²" rateDividend="0.0000010" rateDivisor="1.0"/>
+    <units xmi:id="_MDA8YsTQEem8IdSbv-_EoQ" name="squareCentimetre" symbol="cm²" rateDividend="0.00010" rateDivisor="1.0"/>
+    <units xmi:id="_MDA8Y8TQEem8IdSbv-_EoQ" name="squareDecimetre" symbol="dm²" rateDividend="0.01" rateDivisor="1.0"/>
+    <units xmi:id="_MDA8ZMTQEem8IdSbv-_EoQ" name="squareMetre" symbol="m²" rateDividend="1.0" rateDivisor="1.0"/>
+    <units xmi:id="_MDA8ZcTQEem8IdSbv-_EoQ" name="hectare" symbol="ha" rateDividend="10000.0" rateDivisor="1.0"/>
+    <units xmi:id="_MDA8ZsTQEem8IdSbv-_EoQ" name="squareKilometre" symbol="km²" rateDividend="1000000.0" rateDivisor="1.0"/>
+    <terms xmi:id="_MDbMEMTQEem8IdSbv-_EoQ" exponent="2" baseMeasure="_MC4ZgcTQEem8IdSbv-_EoQ"/>
+  </measure:DerivedMeasure>
+  <measure:DerivedMeasure xmi:id="_MC7c0cTQEem8IdSbv-_EoQ" namespace="demo::measures" name="Volume">
+    <units xmi:id="_MDA8Z8TQEem8IdSbv-_EoQ" name="cubicMillimetre" symbol="mm³" rateDividend="1.0E-9" rateDivisor="1.0"/>
+    <units xmi:id="_MDA8aMTQEem8IdSbv-_EoQ" name="cubicCentimetre" symbol="cm³" rateDividend="0.0000010" rateDivisor="1.0"/>
+    <units xmi:id="_MDA8acTQEem8IdSbv-_EoQ" name="cubicDecimetre" symbol="dm³" rateDividend="0.001" rateDivisor="1.0"/>
+    <units xmi:id="_MDA8asTQEem8IdSbv-_EoQ" name="cubicMetre" symbol="m³" rateDividend="1.0" rateDivisor="1.0"/>
+    <units xmi:id="_MDA8a8TQEem8IdSbv-_EoQ" name="millilitre" symbol="ml" rateDividend="0.0000010" rateDivisor="1.0"/>
+    <units xmi:id="_MDA8bMTQEem8IdSbv-_EoQ" name="centilitre" symbol="cl" rateDividend="0.000010" rateDivisor="1.0"/>
+    <units xmi:id="_MDA8bcTQEem8IdSbv-_EoQ" name="decilitre" symbol="dl" rateDividend="0.00010" rateDivisor="1.0"/>
+    <units xmi:id="_MDA8bsTQEem8IdSbv-_EoQ" name="litre" symbol="l" rateDividend="0.001" rateDivisor="1.0"/>
+    <units xmi:id="_MDA8b8TQEem8IdSbv-_EoQ" name="hectolitre" symbol="hl" rateDividend="0.1" rateDivisor="1.0"/>
+    <terms xmi:id="_MDdBQMTQEem8IdSbv-_EoQ" exponent="3" baseMeasure="_MC4ZgcTQEem8IdSbv-_EoQ"/>
+  </measure:DerivedMeasure>
+  <measure:DerivedMeasure xmi:id="_MC7c0sTQEem8IdSbv-_EoQ" namespace="demo::measures" name="Velocity">
+    <units xmi:id="_MDA8cMTQEem8IdSbv-_EoQ" name="kilometrePerHour" symbol="km/h" rateDividend="1.0" rateDivisor="3.6"/>
+    <units xmi:id="_MDA8ccTQEem8IdSbv-_EoQ" name="metrePerSecond" symbol="m/s" rateDividend="1.0" rateDivisor="1.0"/>
+    <terms xmi:id="_MDgroMTQEem8IdSbv-_EoQ" exponent="1" baseMeasure="_MC4ZgcTQEem8IdSbv-_EoQ"/>
+    <terms xmi:id="_MDhSsMTQEem8IdSbv-_EoQ" exponent="-1" baseMeasure="_MC3ycMTQEem8IdSbv-_EoQ"/>
+  </measure:DerivedMeasure>
+  <measure:DerivedMeasure xmi:id="_MC7c08TQEem8IdSbv-_EoQ" namespace="demo::measures" name="Acceleration">
+    <units xmi:id="_MDA8csTQEem8IdSbv-_EoQ" name="metrePerSecondSquared" symbol="m/s²" rateDividend="1.0" rateDivisor="1.0"/>
+    <terms xmi:id="_MEOdUMTQEem8IdSbv-_EoQ" exponent="1" baseMeasure="_MC4ZgcTQEem8IdSbv-_EoQ"/>
+    <terms xmi:id="_MEOdUcTQEem8IdSbv-_EoQ" exponent="-2" baseMeasure="_MC3ycMTQEem8IdSbv-_EoQ"/>
+  </measure:DerivedMeasure>
+  <measure:DerivedMeasure xmi:id="_MC7c1MTQEem8IdSbv-_EoQ" namespace="demo::measures" name="Momentum">
+    <units xmi:id="_MDA8c8TQEem8IdSbv-_EoQ" name="kilogramMetrePerSecond" symbol="kg*m/s" rateDividend="1.0" rateDivisor="1.0"/>
+    <terms xmi:id="_MESHsMTQEem8IdSbv-_EoQ" exponent="1" baseMeasure="_MC4ZgcTQEem8IdSbv-_EoQ"/>
+    <terms xmi:id="_MESHscTQEem8IdSbv-_EoQ" exponent="1" baseMeasure="_MC2kUMTQEem8IdSbv-_EoQ"/>
+    <terms xmi:id="_MESuwMTQEem8IdSbv-_EoQ" exponent="-1" baseMeasure="_MC3ycMTQEem8IdSbv-_EoQ"/>
+  </measure:DerivedMeasure>
+  <measure:DerivedMeasure xmi:id="_MC7c1cTQEem8IdSbv-_EoQ" namespace="demo::measures" name="Force">
+    <units xmi:id="_MDA8dMTQEem8IdSbv-_EoQ" name="newton" symbol="N" rateDividend="1.0" rateDivisor="1.0"/>
+    <terms xmi:id="_MEWZIMTQEem8IdSbv-_EoQ" exponent="1" baseMeasure="_MC4ZgcTQEem8IdSbv-_EoQ"/>
+    <terms xmi:id="_MEXAMMTQEem8IdSbv-_EoQ" exponent="1" baseMeasure="_MC2kUMTQEem8IdSbv-_EoQ"/>
+    <terms xmi:id="_MEXAMcTQEem8IdSbv-_EoQ" exponent="-2" baseMeasure="_MC3ycMTQEem8IdSbv-_EoQ"/>
+  </measure:DerivedMeasure>
+  <measure:DerivedMeasure xmi:id="_MC7c1sTQEem8IdSbv-_EoQ" namespace="demo::measures" name="Work">
+    <units xmi:id="_MDA8dcTQEem8IdSbv-_EoQ" name="joule" symbol="J" rateDividend="1.0" rateDivisor="1.0"/>
+    <units xmi:id="_MDA8dsTQEem8IdSbv-_EoQ" name="kilojoule" symbol="kJ" rateDividend="1000.0" rateDivisor="1.0"/>
+    <units xmi:id="_MDA8d8TQEem8IdSbv-_EoQ" name="megajoule" symbol="MJ" rateDividend="1000000.0" rateDivisor="1.0"/>
+    <units xmi:id="_MDA8eMTQEem8IdSbv-_EoQ" name="watthour" rateDividend="3600.0" rateDivisor="1.0"/>
+    <units xmi:id="_MDA8ecTQEem8IdSbv-_EoQ" name="kilowatthour" symbol="kWh" rateDividend="3600000.0" rateDivisor="1.0"/>
+    <terms xmi:id="_MEaqkMTQEem8IdSbv-_EoQ" exponent="2" baseMeasure="_MC4ZgcTQEem8IdSbv-_EoQ"/>
+    <terms xmi:id="_MEbRoMTQEem8IdSbv-_EoQ" exponent="1" baseMeasure="_MC2kUMTQEem8IdSbv-_EoQ"/>
+    <terms xmi:id="_MEbRocTQEem8IdSbv-_EoQ" exponent="-2" baseMeasure="_MC3ycMTQEem8IdSbv-_EoQ"/>
+  </measure:DerivedMeasure>
+  <measure:DerivedMeasure xmi:id="_MC7c18TQEem8IdSbv-_EoQ" namespace="demo::measures" name="Power">
+    <units xmi:id="_MDA8esTQEem8IdSbv-_EoQ" name="watt" symbol="W" rateDividend="1.0" rateDivisor="1.0"/>
+    <units xmi:id="_MDA8e8TQEem8IdSbv-_EoQ" name="kilowatt" symbol="kW" rateDividend="1000.0" rateDivisor="1.0"/>
+    <units xmi:id="_MDA8fMTQEem8IdSbv-_EoQ" name="megawatt" symbol="MW" rateDividend="1000000.0" rateDivisor="1.0"/>
+    <terms xmi:id="_MEfjEMTQEem8IdSbv-_EoQ" exponent="2" baseMeasure="_MC4ZgcTQEem8IdSbv-_EoQ"/>
+    <terms xmi:id="_MEgKIMTQEem8IdSbv-_EoQ" exponent="1" baseMeasure="_MC2kUMTQEem8IdSbv-_EoQ"/>
+    <terms xmi:id="_MEgxMMTQEem8IdSbv-_EoQ" exponent="-3" baseMeasure="_MC3ycMTQEem8IdSbv-_EoQ"/>
+  </measure:DerivedMeasure>
+  <measure:DerivedMeasure xmi:id="_MC7c2MTQEem8IdSbv-_EoQ" namespace="demo::measures" name="Frequency">
+    <units xmi:id="_MDA8fcTQEem8IdSbv-_EoQ" name="hertz" symbol="Hz" rateDividend="1.0" rateDivisor="1.0"/>
+    <units xmi:id="_MDA8fsTQEem8IdSbv-_EoQ" name="kilohertz" symbol="kHz" rateDividend="1000.0" rateDivisor="1.0"/>
+    <units xmi:id="_MDA8f8TQEem8IdSbv-_EoQ" name="megahertz" symbol="Mhz" rateDividend="1000000.0" rateDivisor="1.0"/>
+    <units xmi:id="_MDA8gMTQEem8IdSbv-_EoQ" name="gigahertz" symbol="Ghz" rateDividend="1.0E+9" rateDivisor="1.0"/>
+    <terms xmi:id="_MEjNcMTQEem8IdSbv-_EoQ" exponent="-1" baseMeasure="_MC3ycMTQEem8IdSbv-_EoQ"/>
+  </measure:DerivedMeasure>
+  <measure:DerivedMeasure xmi:id="_MC8D4MTQEem8IdSbv-_EoQ" namespace="demo::measures" name="Pressure">
+    <units xmi:id="_MDA8gcTQEem8IdSbv-_EoQ" name="pascal" symbol="Pa" rateDividend="1.0" rateDivisor="1.0"/>
+    <units xmi:id="_MDA8gsTQEem8IdSbv-_EoQ" name="hectopascal" symbol="hPa" rateDividend="100.0" rateDivisor="1.0"/>
+    <terms xmi:id="_MEne4MTQEem8IdSbv-_EoQ" exponent="-1" baseMeasure="_MC4ZgcTQEem8IdSbv-_EoQ"/>
+    <terms xmi:id="_MEoF8MTQEem8IdSbv-_EoQ" exponent="1" baseMeasure="_MC2kUMTQEem8IdSbv-_EoQ"/>
+    <terms xmi:id="_MEotAMTQEem8IdSbv-_EoQ" exponent="-2" baseMeasure="_MC3ycMTQEem8IdSbv-_EoQ"/>
+  </measure:DerivedMeasure>
+  <measure:DerivedMeasure xmi:id="_MC8D4cTQEem8IdSbv-_EoQ" namespace="demo::measures" name="Density">
+    <units xmi:id="_MDA8g8TQEem8IdSbv-_EoQ" name="kilogramPerCubicMetre" symbol="kg/m³" rateDividend="1.0" rateDivisor="1.0"/>
+    <units xmi:id="_MDA8hMTQEem8IdSbv-_EoQ" name="gramPerCubicCentimetre" symbol="g/cm³" rateDividend="1000.0" rateDivisor="1.0"/>
+    <terms xmi:id="_MErJQMTQEem8IdSbv-_EoQ" exponent="-3" baseMeasure="_MC4ZgcTQEem8IdSbv-_EoQ"/>
+    <terms xmi:id="_MErJQcTQEem8IdSbv-_EoQ" exponent="1" baseMeasure="_MC2kUMTQEem8IdSbv-_EoQ"/>
+  </measure:DerivedMeasure>
+  <measure:DerivedMeasure xmi:id="_MC8D4sTQEem8IdSbv-_EoQ" namespace="demo::measures" name="ElectricCharge">
+    <units xmi:id="_MDBjc8TQEem8IdSbv-_EoQ" name="coulomb" symbol="C" rateDividend="1.0" rateDivisor="1.0"/>
+    <terms xmi:id="_MEuMkMTQEem8IdSbv-_EoQ" exponent="1" baseMeasure="_MC5AkcTQEem8IdSbv-_EoQ"/>
+    <terms xmi:id="_MEuMkcTQEem8IdSbv-_EoQ" exponent="1" baseMeasure="_MC3ycMTQEem8IdSbv-_EoQ"/>
+  </measure:DerivedMeasure>
+  <measure:DerivedMeasure xmi:id="_MC8D48TQEem8IdSbv-_EoQ" namespace="demo::measures" name="ElectricPotential">
+    <units xmi:id="_MDBjdMTQEem8IdSbv-_EoQ" name="volt" symbol="V" rateDividend="1.0" rateDivisor="1.0"/>
+    <units xmi:id="_MDBjdcTQEem8IdSbv-_EoQ" name="kilovolt" symbol="kV" rateDividend="1000.0" rateDivisor="1.0"/>
+    <terms xmi:id="_MEyeAMTQEem8IdSbv-_EoQ" exponent="2" baseMeasure="_MC4ZgcTQEem8IdSbv-_EoQ"/>
+    <terms xmi:id="_MEyeAcTQEem8IdSbv-_EoQ" exponent="-1" baseMeasure="_MC5AkcTQEem8IdSbv-_EoQ"/>
+    <terms xmi:id="_MEzFEMTQEem8IdSbv-_EoQ" exponent="1" baseMeasure="_MC2kUMTQEem8IdSbv-_EoQ"/>
+    <terms xmi:id="_MEzFEcTQEem8IdSbv-_EoQ" exponent="-3" baseMeasure="_MC3ycMTQEem8IdSbv-_EoQ"/>
+  </measure:DerivedMeasure>
+  <measure:DerivedMeasure xmi:id="_MC8D5MTQEem8IdSbv-_EoQ" namespace="demo::measures" name="Capacitance">
+    <units xmi:id="_MDBjdsTQEem8IdSbv-_EoQ" name="pikofarad" symbol="pF" rateDividend="1.0E-12" rateDivisor="1.0"/>
+    <units xmi:id="_MDBjd8TQEem8IdSbv-_EoQ" name="nanofarad" symbol="nF" rateDividend="1.0E-9" rateDivisor="1.0"/>
+    <units xmi:id="_MDBjeMTQEem8IdSbv-_EoQ" name="microfarad" symbol="μF" rateDividend="0.0000010" rateDivisor="1.0"/>
+    <units xmi:id="_MDBjecTQEem8IdSbv-_EoQ" name="farad" symbol="F" rateDividend="1.0" rateDivisor="1.0"/>
+    <terms xmi:id="_ME2IYMTQEem8IdSbv-_EoQ" exponent="-2" baseMeasure="_MC4ZgcTQEem8IdSbv-_EoQ"/>
+    <terms xmi:id="_ME2IYcTQEem8IdSbv-_EoQ" exponent="2" baseMeasure="_MC5AkcTQEem8IdSbv-_EoQ"/>
+    <terms xmi:id="_ME2vcMTQEem8IdSbv-_EoQ" exponent="-1" baseMeasure="_MC2kUMTQEem8IdSbv-_EoQ"/>
+    <terms xmi:id="_ME2vccTQEem8IdSbv-_EoQ" exponent="4" baseMeasure="_MC3ycMTQEem8IdSbv-_EoQ"/>
+  </measure:DerivedMeasure>
+  <measure:DerivedMeasure xmi:id="_MC8D5cTQEem8IdSbv-_EoQ" namespace="demo::measures" name="ElectricalResistance">
+    <units xmi:id="_MDBjesTQEem8IdSbv-_EoQ" name="microohm" symbol="μΩ" rateDividend="0.0000010" rateDivisor="1.0"/>
+    <units xmi:id="_MDBje8TQEem8IdSbv-_EoQ" name="milliohm" symbol="mΩ" rateDividend="0.001" rateDivisor="1.0"/>
+    <units xmi:id="_MDBjfMTQEem8IdSbv-_EoQ" name="ohm" symbol="Ω" rateDividend="1.0" rateDivisor="1.0"/>
+    <terms xmi:id="_ME39kMTQEem8IdSbv-_EoQ" exponent="2" baseMeasure="_MC4ZgcTQEem8IdSbv-_EoQ"/>
+    <terms xmi:id="_ME4koMTQEem8IdSbv-_EoQ" exponent="-2" baseMeasure="_MC5AkcTQEem8IdSbv-_EoQ"/>
+    <terms xmi:id="_ME4kocTQEem8IdSbv-_EoQ" exponent="1" baseMeasure="_MC2kUMTQEem8IdSbv-_EoQ"/>
+    <terms xmi:id="_ME5LsMTQEem8IdSbv-_EoQ" exponent="-3" baseMeasure="_MC3ycMTQEem8IdSbv-_EoQ"/>
+  </measure:DerivedMeasure>
+  <measure:DerivedMeasure xmi:id="_MC8D5sTQEem8IdSbv-_EoQ" namespace="demo::measures" name="ElectricalConductance">
+    <units xmi:id="_MDBjfcTQEem8IdSbv-_EoQ" name="siemens" symbol="S" rateDividend="1.0" rateDivisor="1.0"/>
+    <terms xmi:id="_ME7n8MTQEem8IdSbv-_EoQ" exponent="-2" baseMeasure="_MC4ZgcTQEem8IdSbv-_EoQ"/>
+    <terms xmi:id="_ME8PAMTQEem8IdSbv-_EoQ" exponent="2" baseMeasure="_MC5AkcTQEem8IdSbv-_EoQ"/>
+    <terms xmi:id="_ME8PAcTQEem8IdSbv-_EoQ" exponent="-1" baseMeasure="_MC2kUMTQEem8IdSbv-_EoQ"/>
+    <terms xmi:id="_ME8PAsTQEem8IdSbv-_EoQ" exponent="3" baseMeasure="_MC3ycMTQEem8IdSbv-_EoQ"/>
+  </measure:DerivedMeasure>
+  <measure:DerivedMeasure xmi:id="_MC8D58TQEem8IdSbv-_EoQ" namespace="demo::measures" name="MagneticFlux">
+    <units xmi:id="_MDBjfsTQEem8IdSbv-_EoQ" name="weber" symbol="Wb" rateDividend="1.0" rateDivisor="1.0"/>
+    <terms xmi:id="_ME-EMMTQEem8IdSbv-_EoQ" exponent="2" baseMeasure="_MC4ZgcTQEem8IdSbv-_EoQ"/>
+    <terms xmi:id="_ME-EMcTQEem8IdSbv-_EoQ" exponent="-1" baseMeasure="_MC5AkcTQEem8IdSbv-_EoQ"/>
+    <terms xmi:id="_ME-EMsTQEem8IdSbv-_EoQ" exponent="1" baseMeasure="_MC2kUMTQEem8IdSbv-_EoQ"/>
+    <terms xmi:id="_ME-EM8TQEem8IdSbv-_EoQ" exponent="-2" baseMeasure="_MC3ycMTQEem8IdSbv-_EoQ"/>
+  </measure:DerivedMeasure>
+  <measure:DerivedMeasure xmi:id="_MC8D6MTQEem8IdSbv-_EoQ" namespace="demo::measures" name="MagneticFluxDensity">
+    <units xmi:id="_MDBjf8TQEem8IdSbv-_EoQ" name="tesla" symbol="T" rateDividend="1.0" rateDivisor="1.0"/>
+    <terms xmi:id="_MFAgcMTQEem8IdSbv-_EoQ" exponent="-1" baseMeasure="_MC5AkcTQEem8IdSbv-_EoQ"/>
+    <terms xmi:id="_MFBHgMTQEem8IdSbv-_EoQ" exponent="1" baseMeasure="_MC2kUMTQEem8IdSbv-_EoQ"/>
+    <terms xmi:id="_MFBHgcTQEem8IdSbv-_EoQ" exponent="-2" baseMeasure="_MC3ycMTQEem8IdSbv-_EoQ"/>
+  </measure:DerivedMeasure>
+  <measure:DerivedMeasure xmi:id="_MC8D6cTQEem8IdSbv-_EoQ" namespace="demo::measures" name="Inductance">
+    <units xmi:id="_MDBjgMTQEem8IdSbv-_EoQ" name="henry" symbol="H" rateDividend="1.0" rateDivisor="1.0"/>
+    <terms xmi:id="_MFEK0MTQEem8IdSbv-_EoQ" exponent="2" baseMeasure="_MC4ZgcTQEem8IdSbv-_EoQ"/>
+    <terms xmi:id="_MFEK0cTQEem8IdSbv-_EoQ" exponent="-2" baseMeasure="_MC5AkcTQEem8IdSbv-_EoQ"/>
+    <terms xmi:id="_MFEK0sTQEem8IdSbv-_EoQ" exponent="1" baseMeasure="_MC2kUMTQEem8IdSbv-_EoQ"/>
+    <terms xmi:id="_MFEK08TQEem8IdSbv-_EoQ" exponent="-2" baseMeasure="_MC3ycMTQEem8IdSbv-_EoQ"/>
+  </measure:DerivedMeasure>
+  <measure:DerivedMeasure xmi:id="_MC8D6sTQEem8IdSbv-_EoQ" namespace="demo::measures" name="Illuminance">
+    <units xmi:id="_MDBjgcTQEem8IdSbv-_EoQ" name="lux" symbol="lx" rateDividend="1.0" rateDivisor="1.0"/>
+    <terms xmi:id="_MFGnEMTQEem8IdSbv-_EoQ" exponent="-2" baseMeasure="_MC4ZgcTQEem8IdSbv-_EoQ"/>
+    <terms xmi:id="_MFGnEcTQEem8IdSbv-_EoQ" exponent="1" baseMeasure="_MC5nosTQEem8IdSbv-_EoQ"/>
+  </measure:DerivedMeasure>
+</xmi:XMI>
