@@ -734,7 +734,7 @@
                 <module>model</module>
                 <module>model-test</module>
                 <module>osgi</module>
-				<module>osgi-test</module>
+				<module>osgi-itest</module>
                 <module>feature</module>
                 <module>site</module>
             </modules>
