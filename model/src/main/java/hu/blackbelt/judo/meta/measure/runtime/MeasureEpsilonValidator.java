@@ -32,7 +32,7 @@ public class MeasureEpsilonValidator {
                                    URI scriptRoot,
                                    Collection<String> expectedErrors,
                                    Collection<String> expectedWarnings) throws ScriptExecutionException, URISyntaxException
-	{
+	{		
 		ExecutionContext executionContext = executionContextBuilder()
 	            .log(log)
 	            .resourceSet(measureModel.getResourceSet())
@@ -66,5 +66,20 @@ public class MeasureEpsilonValidator {
 	            } catch (Exception e) {}
 	        }
 	}
+	
+	public static URI calculateMeasureValidationScriptURI() throws URISyntaxException {
+        URI measureRoot = MeasureModel.class.getProtectionDomain().getCodeSource().getLocation().toURI();
+        if (measureRoot.toString().endsWith(".jar")) {
+            measureRoot = new URI("jar:" + measureRoot.toString() + "!/validations/");
+        } else if (measureRoot.toString().startsWith("jar:bundle:")) {
+            // bundle://37.0:0/validations/
+            // jar:bundle://37.0:0/!/validations/measure.evl
+            measureRoot = new URI(measureRoot.toString().substring(4, measureRoot.toString().indexOf("!")) + "validations/");
+        } else {
+            measureRoot = new URI(measureRoot.toString() + "/validations/");
+        }
+        return measureRoot;
+
+    }
 
 }
