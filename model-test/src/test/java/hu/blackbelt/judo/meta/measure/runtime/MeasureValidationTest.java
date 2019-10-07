@@ -1,7 +1,5 @@
 package hu.blackbelt.judo.meta.measure.runtime;
 
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableMap;
 import hu.blackbelt.epsilon.runtime.execution.ExecutionContext;
 import hu.blackbelt.epsilon.runtime.execution.api.Log;
 import hu.blackbelt.epsilon.runtime.execution.exceptions.EvlScriptExecutionException;
@@ -16,14 +14,11 @@ import org.slf4j.Logger;
 
 import java.util.Collection;
 
-import static hu.blackbelt.epsilon.runtime.execution.ExecutionContext.executionContextBuilder;
-import static hu.blackbelt.epsilon.runtime.execution.model.emf.WrappedEmfModelContext.wrappedEmfModelContextBuilder;
 import static hu.blackbelt.judo.meta.measure.support.MeasureModelResourceSupport.measureModelResourceSupportBuilder;
 
 
 public class MeasureValidationTest {
 
-    private ExecutionContext executionContext;
     MeasureModelResourceSupport measureModelSupport;
     
     private static final Logger logger = LoggerFactory.getLogger(MeasureValidationTest.class);
@@ -31,37 +26,17 @@ public class MeasureValidationTest {
 
     private Log log = new Slf4jLog();
     private MeasureModel measureModel;
-    private MeasureUtils measureUtils;
-
     @BeforeEach
     void setUp() {
 
         measureModelSupport = measureModelResourceSupportBuilder()
                 .uri(URI.createFileURI(createdSourceModelName))
                 .build();
-
-        Log log = new Slf4jLog();
-
-        measureUtils = new MeasureUtils(measureModelSupport.getResourceSet(), false);
         
         measureModel = MeasureModel.buildMeasureModel()
         		.measureModelResourceSupport(measureModelSupport)
                 .uri(URI.createURI(createdSourceModelName))
                 .name("test")
-                .build();
-
-        // Execution context
-        executionContext = executionContextBuilder()
-                .log(log)
-                .resourceSet(measureModelSupport.getResourceSet())
-                .metaModels(ImmutableList.of())
-                .modelContexts(ImmutableList.of(
-                        wrappedEmfModelContextBuilder()
-                                .log(log)
-                                .name("MEASURE")
-                                .resource(measureModelSupport.getResource())
-                                .build()))
-                .injectContexts(ImmutableMap.of("measureUtils", measureUtils))
                 .build();
     }
 
