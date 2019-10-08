@@ -1,10 +1,8 @@
 package hu.blackbelt.judo.meta.measure.runtime;
 
-import hu.blackbelt.epsilon.runtime.execution.ExecutionContext;
 import hu.blackbelt.epsilon.runtime.execution.api.Log;
 import hu.blackbelt.epsilon.runtime.execution.exceptions.EvlScriptExecutionException;
 import hu.blackbelt.epsilon.runtime.execution.impl.Slf4jLog;
-import hu.blackbelt.judo.meta.measure.runtime.MeasureUtils;
 import hu.blackbelt.judo.meta.measure.support.MeasureModelResourceSupport;
 
 import org.eclipse.emf.common.util.URI;
