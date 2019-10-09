@@ -28,7 +28,7 @@ public class MeasureModelLoaderTest {
 
         MeasureModel measureModel = MeasureModel.loadMeasureModel(measureLoadArgumentsBuilder()
                 .resourceSet(measureResourceSet)
-                .uri(URI.createFileURI(new File("src/test/model/test.measure").getAbsolutePath()))
+                .uri(URI.createFileURI(new File("target/test-classes/model/northwind-measure.model").getAbsolutePath()))
                 .name("test")
                 .build());
 
