@@ -33,7 +33,6 @@ public class MeasureValidationTest {
         
         measureModel = MeasureModel.buildMeasureModel()
         		.measureModelResourceSupport(measureModelSupport)
-                .uri(URI.createURI(createdSourceModelName))
                 .name("test")
                 .build();
     }
