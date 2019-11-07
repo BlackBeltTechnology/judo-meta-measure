@@ -32,7 +32,7 @@
 		  <unit id="org.eclipse.epsilon.uml.dt.feature.feature.group" version="1.5.1.201809302027"/>
 		  <unit id="org.eclipse.epsilon.uml.feature.feature.group" version="1.5.1.201809302027"/>
 		  <repository location="http://download.eclipse.org/epsilon/updates"/>
-
+          </location>
 	  <location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
 		  <unit id="hu.blackbelt.eclipse.emf.genmodel.generator.feature.feature.group" version="1.0.0.20191105_182930_676cf43_develop"/>
 		  <repository location="https://nexus.judo.technology/repository/p2/emf-genmodel-generator/1.0.0.20191105_182930_676cf43_develop"/>
