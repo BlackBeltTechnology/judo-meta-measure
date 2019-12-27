@@ -127,14 +127,6 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.ops4j.pax.tinybundles/tinybundles -->
-        <dependency>
-            <groupId>org.ops4j.pax.tinybundles</groupId>
-            <artifactId>tinybundles</artifactId>
-            <version>3.0.0</version>
-            <scope>test</scope>
-        </dependency>
-
         <dependency>
             <groupId>org.apache.servicemix.bundles</groupId>
             <artifactId>org.apache.servicemix.bundles.hamcrest</artifactId>
@@ -278,7 +270,7 @@
         <dependency>
             <groupId>hu.blackbelt.judo.tatami</groupId>
             <artifactId>judo-tatami-psm2measure</artifactId>
-            <version>${judo-tatami-version}</version>
+            <version>${judo-tatami-maven-plugin-version}</version>
         </dependency>
     </dependencies>
 
@@ -324,7 +316,7 @@
             <plugin>
                 <groupId>hu.blackbelt.judo.tatami</groupId>
                 <artifactId>judo-tatami-workflow-maven-plugin</artifactId>
-                <version>${judo-tatami-version}</version>
+                <version>${judo-tatami-maven-plugin-version}</version>
                 <executions>
                     <execution>
                         <phase>compile</phase>
