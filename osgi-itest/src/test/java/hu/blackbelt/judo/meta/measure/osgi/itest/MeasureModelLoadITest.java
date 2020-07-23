@@ -3,7 +3,11 @@ package hu.blackbelt.judo.meta.measure.osgi.itest;
 import hu.blackbelt.epsilon.runtime.execution.impl.StringBuilderLogger;
 import hu.blackbelt.judo.meta.measure.runtime.MeasureEpsilonValidator;
 import hu.blackbelt.judo.meta.measure.runtime.MeasureModel;
+import hu.blackbelt.judo.meta.measure.runtime.MeasureModel.MeasureValidationException;
+import hu.blackbelt.judo.meta.measure.runtime.MeasureModel.SaveArguments;
 import hu.blackbelt.osgi.utils.osgi.api.BundleTrackerManager;
+
+import org.eclipse.emf.common.util.URI;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.ops4j.pax.exam.Configuration;
@@ -44,7 +48,7 @@ public class MeasureModelLoadITest {
     MeasureModel measureModel;
 
     @Configuration
-    public Option[] config() throws FileNotFoundException {
+    public Option[] config() throws IOException, MeasureValidationException {
 
         return combine(getRuntimeFeaturesForMetamodel(this.getClass()),
                 mavenBundle(maven()
@@ -54,16 +58,25 @@ public class MeasureModelLoadITest {
                 getProvisonModelBundle());
     }
 
-    public Option getProvisonModelBundle() throws FileNotFoundException {
+    public Option getProvisonModelBundle() throws IOException, MeasureValidationException {
         return provision(
                 getMeasureModelBundle()
         );
     }
 
-    private InputStream getMeasureModelBundle() throws FileNotFoundException {
+    private InputStream getMeasureModelBundle() throws IOException, MeasureValidationException {
+    	MeasureModel measureModel = MeasureModel.buildMeasureModel()
+    			.name(DEMO)
+    			.uri(URI.createFileURI("test.model"))
+    			.build();
+    	
+    	ByteArrayOutputStream os = new ByteArrayOutputStream();
+    	
+    	measureModel.saveMeasureModel(SaveArguments.measureSaveArgumentsBuilder().outputStream(os));
+    	
         return bundle()
                 .add( "model/" + DEMO + ".judo-meta-measure",
-                        new FileInputStream(new File(testTargetDir(getClass()).getAbsolutePath(),  "northwind-measure.model")))
+                		new ByteArrayInputStream(os.toByteArray()))
                 .set( Constants.BUNDLE_MANIFESTVERSION, "2")
                 .set( Constants.BUNDLE_SYMBOLICNAME, DEMO + "-measure" )
                 //set( Constants.IMPORT_PACKAGE, "meta/psm;version=\"" + getConfiguration(META_PSM_IMPORT_RANGE) +"\"")
