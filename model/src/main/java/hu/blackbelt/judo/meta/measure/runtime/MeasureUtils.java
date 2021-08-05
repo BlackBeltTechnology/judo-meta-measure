@@ -67,7 +67,7 @@ public class MeasureUtils {
      * @see MeasureUtils#MeasureUtils(ResourceSet)
      * @see MeasureUtils#setResourceSet(ResourceSet)
      */
-    public void validateUniqueXmiids() { // TODO: test
+    public void validateUniqueXmiids() {
         if (resourceSet == null) {
             throw new IllegalStateException("Model's ResourceSet is unknown (null)");
         }
