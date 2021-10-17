@@ -22,7 +22,7 @@ import org.osgi.service.log.LogService;
 import javax.inject.Inject;
 import java.io.*;
 
-import static hu.blackbelt.judo.meta.measure.osgi.itest.MeasureKarafFeatureProvider.*;
+import static hu.blackbelt.judo.meta.measure.osgi.itest.KarafFeatureProvider.*;
 import static org.junit.Assert.assertFalse;
 import static org.ops4j.pax.exam.CoreOptions.*;
 import static org.ops4j.pax.exam.OptionUtils.combine;
@@ -50,7 +50,7 @@ public class MeasureModelLoadITest {
     @Configuration
     public Option[] config() throws IOException, MeasureValidationException {
 
-        return combine(getRuntimeFeaturesForMetamodel(this.getClass()),
+        return combine(karafConfig(this.getClass()),
                 mavenBundle(maven()
                         .groupId("hu.blackbelt.judo.meta")
                         .artifactId("hu.blackbelt.judo.meta.measure.osgi")
