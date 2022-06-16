@@ -1,12 +1,12 @@
 package hu.blackbelt.judo.meta.measure.osgi.itest;
 
-import hu.blackbelt.epsilon.runtime.execution.impl.StringBuilderLogger;
-import hu.blackbelt.judo.meta.measure.runtime.MeasureEpsilonValidator;
+import hu.blackbelt.epsilon.runtime.execution.api.Log;
+import hu.blackbelt.epsilon.runtime.execution.impl.BufferedSlf4jLogger;
 import hu.blackbelt.judo.meta.measure.runtime.MeasureModel;
 import hu.blackbelt.judo.meta.measure.runtime.MeasureModel.MeasureValidationException;
 import hu.blackbelt.judo.meta.measure.runtime.MeasureModel.SaveArguments;
 import hu.blackbelt.osgi.utils.osgi.api.BundleTrackerManager;
-
+import lombok.extern.slf4j.Slf4j;
 import org.eclipse.emf.common.util.URI;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,13 +17,13 @@ import org.ops4j.pax.exam.spi.reactors.ExamReactorStrategy;
 import org.ops4j.pax.exam.spi.reactors.PerClass;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.Constants;
-import org.osgi.service.log.LogService;
 
 import javax.inject.Inject;
 import java.io.*;
 
-import static hu.blackbelt.judo.meta.measure.osgi.itest.KarafFeatureProvider.*;
-import static org.junit.Assert.assertFalse;
+import static hu.blackbelt.judo.meta.measure.osgi.itest.KarafFeatureProvider.karafConfig;
+import static hu.blackbelt.judo.meta.measure.runtime.MeasureEpsilonValidator.calculateMeasureValidationScriptURI;
+import static hu.blackbelt.judo.meta.measure.runtime.MeasureEpsilonValidator.validateMeasure;
 import static org.ops4j.pax.exam.CoreOptions.*;
 import static org.ops4j.pax.exam.OptionUtils.combine;
 import static org.ops4j.pax.tinybundles.core.TinyBundles.bundle;
@@ -31,12 +31,10 @@ import static org.ops4j.pax.tinybundles.core.TinyBundles.withBnd;
 
 @RunWith(PaxExam.class)
 @ExamReactorStrategy(PerClass.class)
+@Slf4j
 public class MeasureModelLoadITest {
 
     private static final String DEMO = "northwind-measure";
-
-    @Inject
-    LogService log;
 
     @Inject
     protected BundleTrackerManager bundleTrackerManager;
@@ -85,16 +83,9 @@ public class MeasureModelLoadITest {
     }
 
     @Test
-    public void testModelValidation() {
-        StringBuilderLogger logger = new StringBuilderLogger(StringBuilderLogger.LogLevel.DEBUG);
-        try {
-            MeasureEpsilonValidator.validateMeasure(logger,
-                    measureModel,
-                    MeasureEpsilonValidator.calculateMeasureValidationScriptURI());
-
-        } catch (Exception e) {
-            log.log(LogService.LOG_ERROR, logger.getBuffer());
-            assertFalse(true);
+    public void testModelValidation() throws Exception {
+        try (Log bufferedLog = new BufferedSlf4jLogger(log)) {
+            validateMeasure(bufferedLog, measureModel, calculateMeasureValidationScriptURI());
         }
     }
 }
