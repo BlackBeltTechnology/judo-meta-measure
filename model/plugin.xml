@@ -8,12 +8,44 @@
  $Id$
 -->
 <plugin>
+    <extension
+            point="org.eclipse.epsilon.evl.emf.validation">
+        <constraintsBinding
+                constraints="validations/measure-plugin-validation.evl"
+                modelName="MEASURE"
+                namespaceURI="http://blackbelt.hu/judo/meta/measure">
+            <!-- All packages have to register
+            <additionalNamespaceURI
+                    namespaceURI="http://blackbelt.hu/judo/meta/measure/subpackage">
+            </additionalNamespaceURI>
+            -->
+        </constraintsBinding>
+    </extension>
+    <extension
+            point="org.eclipse.ui.ide.markerResolution">
+        <markerResolutionGenerator
+                class="org.eclipse.epsilon.evl.emf.validation.EvlMarkerResolutionGenerator"
+                markerType="org.eclipse.emf.ecore.diagnostic">
+        </markerResolutionGenerator>
+        <markerResolutionGenerator
+                class="org.eclipse.epsilon.evl.emf.validation.EvlMarkerResolutionGenerator"
+                markerType="org.eclipse.emf.ecoretools.diagram.diagnostic">
+        </markerResolutionGenerator>
+    </extension>
+    <extension
+            point="org.eclipse.epsilon.common.dt.tool">
+        <tool
+                class="hu.blackbelt.judo.meta.measure.runtime.MeasureUtils"
+                defaultName="measureUtils"/>
+    </extension>
+
 
    <extension point="org.eclipse.emf.ecore.generated_package">
       <!-- @generated measure -->
       <package
             uri="http://blackbelt.hu/judo/meta/measure"
-            class="hu.blackbelt.judo.meta.measure.MeasurePackage"/>
+            class="hu.blackbelt.judo.meta.measure.MeasurePackage"
+            genModel="model/measure.genmodel"/>
    </extension>
 
    <extension point="org.eclipse.emf.ecore.extension_parser">

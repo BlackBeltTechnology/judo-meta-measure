@@ -4,17 +4,19 @@ package measure;
 abstract class Measure {
   attr String[1] namespace;
   attr String[1] name;
+  attr String symbol;
   val Unit[*] units;
 }
 
 class Unit {
   attr String[1] name;
+  attr String symbol;
   attr EBigDecimal[1] rateDividend;
   attr EBigDecimal[1] rateDivisor;
 }
 
 class DerivedMeasure extends Measure {
-  val BaseMeasureTerm[1] terms;
+  val BaseMeasureTerm[+] terms;
 }
 
 class BaseMeasure extends Measure {
@@ -26,6 +28,8 @@ class BaseMeasureTerm {
 }
 
 enum DurationType {
+  nanosecond = 8;
+  microsecond = 9;
   millisecond = 0;
   second = 1;
   minute = 2;

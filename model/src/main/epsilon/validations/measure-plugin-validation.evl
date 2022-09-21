@@ -1,0 +1,5 @@
+import "measure.evl";
+
+pre {
+  var measureUtils = new Native("hu.blackbelt.judo.meta.measure.runtime.MeasureUtils")(MEASURE.resource.resourceSet, false);
+}
