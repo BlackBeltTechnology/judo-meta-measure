@@ -93,12 +93,11 @@ public class MeasureModelLoadITest {
     	measureModel.saveMeasureModel(SaveArguments.measureSaveArgumentsBuilder().outputStream(os));
     	
         return bundle()
-                .add( "model/" + DEMO + ".judo-meta-measure",
+                .add( "model/" + measureModel.getName() + "-measure.model",
                 		new ByteArrayInputStream(os.toByteArray()))
                 .set( Constants.BUNDLE_MANIFESTVERSION, "2")
-                .set( Constants.BUNDLE_SYMBOLICNAME, DEMO + "-measure" )
-                //set( Constants.IMPORT_PACKAGE, "meta/psm;version=\"" + getConfiguration(META_PSM_IMPORT_RANGE) +"\"")
-                .set( "Measure-Models", "file=model/" + DEMO + ".judo-meta-measure;version=1.0.0;name=" + DEMO + ";checksum=notset;meta-version-range=\"[1.0.0,2)\"")
+                .set( Constants.BUNDLE_SYMBOLICNAME, measureModel.getName() + "-measure" )
+                .set( "Measure-Models", "name=" + measureModel.getName() + ";file=model/" + measureModel.getName() + "-measure.model")
                 .build( withBnd());
     }
 
