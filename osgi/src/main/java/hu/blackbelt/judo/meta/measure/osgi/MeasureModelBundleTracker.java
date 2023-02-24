@@ -52,19 +52,9 @@ import static java.util.Optional.ofNullable;
 
 @Component(immediate = true)
 @Slf4j
-@Designate(ocd = MeasureModelBundleTracker.TrackerConfig.class)
 public class MeasureModelBundleTracker {
 
     public static final String MEASURE_MODELS = "Measure-Models";
-
-    @ObjectClassDefinition(name="Measure Model Bundle Tracker")
-    public @interface TrackerConfig {
-        @AttributeDefinition(
-                name = "Tags",
-                description = "Which tags are on the loaded model when there is no one defined in bundle"
-        )
-        String tags() default "";
-    }
 
     @Reference
     BundleTrackerManager bundleTrackerManager;
@@ -73,11 +63,8 @@ public class MeasureModelBundleTracker {
 
     Map<String, MeasureModel> measureModels = new HashMap<>();
 
-    TrackerConfig config;
-
     @Activate
-    public void activate(final ComponentContext componentContext, final TrackerConfig trackerConfig) {
-        this.config = trackerConfig;
+    public void activate(final ComponentContext componentContext) {
         bundleTrackerManager.registerBundleCallback(this.getClass().getName(),
                 new MeasureRegisterCallback(componentContext.getBundleContext()),
                 new MeasureUnregisterCallback(),
@@ -115,30 +102,22 @@ public class MeasureModelBundleTracker {
                 if (measureModelRegistrations.containsKey(key)) {
                     log.error("Measure model already loaded: " + key);
                 } else {
-                    if (params.containsKey(MeasureModel.META_VERSION_RANGE)) {
-                        VersionRange versionRange = new VersionRange(params.get(MeasureModel.META_VERSION_RANGE).replaceAll("\"", ""));
-                        if (versionRange.includes(bundleContext.getBundle().getVersion())) {
-                            // Unpack model
-                            try {
-                                        MeasureModel measureModel = MeasureModel.loadMeasureModel(
-                                        MeasureModel.LoadArguments.measureLoadArgumentsBuilder()
-                                                .inputStream(trackedBundle.getEntry(params.get("file")).openStream())
-                                                .name(params.get(MeasureModel.NAME))
-                                                .version(trackedBundle.getVersion().toString())
-                                                .checksum(Optional.ofNullable(params.get(MeasureModel.CHECKSUM)).orElse("notset"))
-                                                .tags(Stream.of(ofNullable(params.get(MeasureModel.TAGS)).orElse(config.tags()).split(",")).collect(Collectors.toSet()))
-                                                .acceptedMetaVersionRange(Optional.of(versionRange.toString()).orElse("[0,99)")));
+                    // Unpack model
+                    try {
+                                MeasureModel measureModel = MeasureModel.loadMeasureModel(
+                                MeasureModel.LoadArguments.measureLoadArgumentsBuilder()
+                                        .inputStream(trackedBundle.getEntry(params.get("file")).openStream())
+                                        .name(params.get(MeasureModel.NAME))
+                                        .version(trackedBundle.getVersion().toString()));
 
-                                log.info("Registering Measure model: " + measureModel);
+                        log.info("Registering Measure model: " + measureModel);
 
-                                ServiceRegistration<MeasureModel> modelServiceRegistration = bundleContext.registerService(MeasureModel.class, measureModel, measureModel.toDictionary());
-                                measureModels.put(key, measureModel);
-                                measureModelRegistrations.put(key, modelServiceRegistration);
+                        ServiceRegistration<MeasureModel> modelServiceRegistration = bundleContext.registerService(MeasureModel.class, measureModel, measureModel.toDictionary());
+                        measureModels.put(key, measureModel);
+                        measureModelRegistrations.put(key, modelServiceRegistration);
 
-                            } catch (IOException | MeasureModel.MeasureValidationException e) {
-                                log.error("Could not load Psm model: " + params.get(MeasureModel.NAME) + " from bundle: " + trackedBundle.getBundleId(), e);
-                            }
-                        }
+                    } catch (IOException | MeasureModel.MeasureValidationException e) {
+                        log.error("Could not load Psm model: " + params.get(MeasureModel.NAME) + " from bundle: " + trackedBundle.getBundleId(), e);
                     }
                 }
             }
