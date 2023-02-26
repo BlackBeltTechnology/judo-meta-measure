@@ -117,7 +117,7 @@ public class MeasureModelBundleTracker {
                         measureModelRegistrations.put(key, modelServiceRegistration);
 
                     } catch (IOException | MeasureModel.MeasureValidationException e) {
-                        log.error("Could not load Psm model: " + params.get(MeasureModel.NAME) + " from bundle: " + trackedBundle.getBundleId(), e);
+                        log.error("Could not load Measure model: " + params.get(MeasureModel.NAME) + " from bundle: " + trackedBundle.getBundleId(), e);
                     }
                 }
             }
