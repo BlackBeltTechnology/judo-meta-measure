@@ -9,13 +9,13 @@ package hu.blackbelt.judo.meta.measure.runtime;
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
- * 
+ *
  * This Source Code may also be made available under the following Secondary
  * Licenses when the conditions for such availability set forth in the Eclipse
  * Public License, v. 2.0 are satisfied: GNU General Public License, version 2
  * with the GNU Classpath Exception which is
  * available at https://www.gnu.org/software/classpath/license.html.
- * 
+ *
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  * #L%
  */
@@ -39,55 +39,55 @@ import hu.blackbelt.epsilon.runtime.execution.exceptions.ScriptExecutionExceptio
 import hu.blackbelt.judo.meta.measure.runtime.MeasureModel;
 
 public class MeasureEpsilonValidator {
-	
-	public static void validateMeasure(Log log,
+
+    public static void validateMeasure(Log log,
                                    MeasureModel measureModel,
                                    URI scriptRoot) throws ScriptExecutionException, URISyntaxException
-	{
-		validateMeasure(log, measureModel, scriptRoot, emptyList(), emptyList());
-	}
-	
-	public static void validateMeasure(Log log,
+    {
+        validateMeasure(log, measureModel, scriptRoot, emptyList(), emptyList());
+    }
+
+    public static void validateMeasure(Log log,
                                    MeasureModel measureModel,
                                    URI scriptRoot,
                                    Collection<String> expectedErrors,
                                    Collection<String> expectedWarnings) throws ScriptExecutionException, URISyntaxException
-	{		
-		ExecutionContext executionContext = executionContextBuilder()
-	            .log(log)
-	            .resourceSet(measureModel.getResourceSet())
-	            .metaModels(emptyList())
-	            .modelContexts(Arrays.asList(
-	                    wrappedEmfModelContextBuilder()
-	                            .log(log)
-	                            .name("MEASURE")
-	                            .validateModel(false)
-	                            .resource(measureModel.getResource())
-	                            .build()))
-	            .injectContexts(singletonMap("measureUtils", new MeasureUtils()))
-	            .build();
-		
-		 try {
-	            // run the model / metadata loading
-	            executionContext.load();
+    {
+        ExecutionContext executionContext = executionContextBuilder()
+                .log(log)
+                .resourceSet(measureModel.getResourceSet())
+                .metaModels(emptyList())
+                .modelContexts(Arrays.asList(
+                        wrappedEmfModelContextBuilder()
+                                .log(log)
+                                .name("MEASURE")
+                                .validateModel(false)
+                                .resource(measureModel.getResource())
+                                .build()))
+                .injectContexts(singletonMap("measureUtils", new MeasureUtils()))
+                .build();
 
-	            // Transformation script
-	            executionContext.executeProgram(
-	                    evlExecutionContextBuilder()
-	                            .source(UriUtil.resolve("measure.evl", scriptRoot))
-	                            .expectedErrors(expectedErrors)
-	                            .expectedWarnings(expectedWarnings)
-	                            .build());
+         try {
+                // run the model / metadata loading
+                executionContext.load();
 
-	        } finally {
-	            executionContext.commit();
-	            try {
-	                executionContext.close();
-	            } catch (Exception e) {}
-	        }
-	}
-	
-	public static URI calculateMeasureValidationScriptURI() throws URISyntaxException {
+                // Transformation script
+                executionContext.executeProgram(
+                        evlExecutionContextBuilder()
+                                .source(UriUtil.resolve("measure.evl", scriptRoot))
+                                .expectedErrors(expectedErrors)
+                                .expectedWarnings(expectedWarnings)
+                                .build());
+
+            } finally {
+                executionContext.commit();
+                try {
+                    executionContext.close();
+                } catch (Exception e) {}
+            }
+    }
+
+    public static URI calculateMeasureValidationScriptURI() throws URISyntaxException {
         URI measureRoot = MeasureModel.class.getProtectionDomain().getCodeSource().getLocation().toURI();
         if (measureRoot.toString().endsWith(".jar")) {
             measureRoot = new URI("jar:" + measureRoot.toString() + "!/validations/");
