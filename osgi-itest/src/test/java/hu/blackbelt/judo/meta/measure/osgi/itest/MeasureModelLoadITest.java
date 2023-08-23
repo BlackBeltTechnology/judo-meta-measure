@@ -20,7 +20,7 @@ package hu.blackbelt.judo.meta.measure.osgi.itest;
  * #L%
  */
 
-import hu.blackbelt.epsilon.runtime.execution.api.Log;
+import org.slf4j.Logger;
 import hu.blackbelt.epsilon.runtime.execution.impl.BufferedSlf4jLogger;
 import hu.blackbelt.judo.meta.measure.runtime.MeasureModel;
 import hu.blackbelt.judo.meta.measure.runtime.MeasureModel.MeasureValidationException;
@@ -103,7 +103,7 @@ public class MeasureModelLoadITest {
 
     @Test
     public void testModelValidation() throws Exception {
-        try (Log bufferedLog = new BufferedSlf4jLogger(log)) {
+        try (BufferedSlf4jLogger bufferedLog = new BufferedSlf4jLogger(log)) {
             validateMeasure(bufferedLog, measureModel, calculateMeasureValidationScriptURI());
         }
     }
