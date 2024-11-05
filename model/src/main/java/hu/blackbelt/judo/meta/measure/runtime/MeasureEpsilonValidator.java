@@ -62,6 +62,7 @@ public class MeasureEpsilonValidator {
                                 .log(log)
                                 .name("MEASURE")
                                 .validateModel(false)
+                                .useCache(true)
                                 .resource(measureModel.getResource())
                                 .build()))
                 .injectContexts(singletonMap("measureUtils", new MeasureUtils()))
