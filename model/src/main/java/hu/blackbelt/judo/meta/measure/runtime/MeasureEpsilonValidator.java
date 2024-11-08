@@ -41,17 +41,24 @@ import hu.blackbelt.judo.meta.measure.runtime.MeasureModel;
 public class MeasureEpsilonValidator {
 
     public static void validateMeasure(Logger log,
-                                   MeasureModel measureModel,
-                                   URI scriptRoot) throws ScriptExecutionException, URISyntaxException
-    {
+                                       MeasureModel measureModel,
+                                       URI scriptRoot) throws ScriptExecutionException, URISyntaxException {
         validateMeasure(log, measureModel, scriptRoot, emptyList(), emptyList());
+    }
+
+    public static void validateMeasure(Logger log,
+                                       MeasureModel measureModel,
+                                       URI scriptRoot,
+                                       Collection<String> expectedErrors,
+                                       Collection<String> expectedWarnings) throws ScriptExecutionException, URISyntaxException {
+        validateMeasure(log, measureModel, scriptRoot, expectedErrors, expectedWarnings, false);
     }
 
     public static void validateMeasure(Logger log,
                                    MeasureModel measureModel,
                                    URI scriptRoot,
                                    Collection<String> expectedErrors,
-                                   Collection<String> expectedWarnings) throws ScriptExecutionException, URISyntaxException
+                                   Collection<String> expectedWarnings, Boolean useCache) throws ScriptExecutionException, URISyntaxException
     {
         ExecutionContext executionContext = executionContextBuilder()
                 .log(log)
@@ -64,6 +71,7 @@ public class MeasureEpsilonValidator {
                                 .validateModel(false)
                                 .useCache(true)
                                 .resource(measureModel.getResource())
+                                .useCache(useCache)
                                 .build()))
                 .injectContexts(singletonMap("measureUtils", new MeasureUtils()))
                 .build();
@@ -78,6 +86,7 @@ public class MeasureEpsilonValidator {
                                 .source(UriUtil.resolve("measure.evl", scriptRoot))
                                 .expectedErrors(expectedErrors)
                                 .expectedWarnings(expectedWarnings)
+                                .parallel(true)
                                 .build());
 
             } finally {
