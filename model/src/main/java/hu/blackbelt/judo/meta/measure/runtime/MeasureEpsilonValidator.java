@@ -69,7 +69,6 @@ public class MeasureEpsilonValidator {
                                 .log(log)
                                 .name("MEASURE")
                                 .validateModel(false)
-                                .useCache(true)
                                 .resource(measureModel.getResource())
                                 .useCache(useCache)
                                 .build()))
