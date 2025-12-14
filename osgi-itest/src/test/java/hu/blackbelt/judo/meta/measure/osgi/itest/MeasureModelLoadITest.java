@@ -24,6 +24,7 @@ import org.slf4j.Logger;
 import hu.blackbelt.epsilon.runtime.execution.impl.BufferedSlf4jLogger;
 import hu.blackbelt.judo.meta.measure.runtime.MeasureModel;
 import hu.blackbelt.judo.meta.measure.runtime.MeasureModel.MeasureValidationException;
+import hu.blackbelt.judo.meta.measure.validation.MeasureValidator;
 import hu.blackbelt.judo.meta.measure.runtime.MeasureModel.SaveArguments;
 import hu.blackbelt.osgi.utils.osgi.api.BundleTrackerManager;
 import lombok.extern.slf4j.Slf4j;
@@ -106,5 +107,10 @@ public class MeasureModelLoadITest {
         try (BufferedSlf4jLogger bufferedLog = new BufferedSlf4jLogger(log)) {
             validateMeasure(bufferedLog, measureModel, calculateMeasureValidationScriptURI());
         }
+    }
+
+    @Test
+    public void testZetaValidation() throws Exception {
+        MeasureValidator.validateMeasure(log, measureModel.getResourceSet());
     }
 }
