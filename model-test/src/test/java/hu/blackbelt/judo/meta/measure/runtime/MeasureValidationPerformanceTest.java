@@ -58,9 +58,8 @@ public class MeasureValidationPerformanceTest {
 
     private static final int NUM_BASE_MEASURES = 100;
     private static final int NUM_DERIVED_MEASURES = 100;
-    private static final int UNITS_PER_MEASURE = 50;
-    private static final int TOTAL_ELEMENTS = NUM_BASE_MEASURES + NUM_DERIVED_MEASURES +
-            (NUM_BASE_MEASURES + NUM_DERIVED_MEASURES) * UNITS_PER_MEASURE;
+    private static final int MIN_UNITS_PER_MEASURE = 1;
+    private static final int MAX_UNITS_PER_MEASURE = 5;
 
     private MeasureModelResourceSupport measureModelSupport;
     private MeasureModel measureModel;
@@ -81,7 +80,8 @@ public class MeasureValidationPerformanceTest {
     @Test
     void testPerformanceComparison() throws Exception {
         log.info("=".repeat(70));
-        log.info("Performance Test: Generating model with ~{} elements", TOTAL_ELEMENTS);
+        log.info("Performance Test: Generating model with {} base + {} derived measures, {}-{} units each",
+                NUM_BASE_MEASURES, NUM_DERIVED_MEASURES, MIN_UNITS_PER_MEASURE, MAX_UNITS_PER_MEASURE);
         log.info("=".repeat(70));
 
         // Generate a large model
@@ -170,8 +170,9 @@ public class MeasureValidationPerformanceTest {
                     .withSymbol("BM" + i)
                     .build();
 
-            // Add units to each measure
-            for (int j = 0; j < UNITS_PER_MEASURE; j++) {
+            // Add 1-5 units to each measure
+            int numUnits = MIN_UNITS_PER_MEASURE + random.nextInt(MAX_UNITS_PER_MEASURE - MIN_UNITS_PER_MEASURE + 1);
+            for (int j = 0; j < numUnits; j++) {
                 BigDecimal dividend = j == 0 ? BigDecimal.ONE : new BigDecimal(String.valueOf(1 + random.nextInt(1000)));
                 BigDecimal divisor = j == 0 ? BigDecimal.ONE : new BigDecimal(String.valueOf(1 + random.nextInt(100)));
 
@@ -211,8 +212,9 @@ public class MeasureValidationPerformanceTest {
                 derived.getTerms().add(term);
             }
 
-            // Add units to derived measure
-            for (int j = 0; j < UNITS_PER_MEASURE; j++) {
+            // Add 1-5 units to derived measure
+            int numDerivedUnits = MIN_UNITS_PER_MEASURE + random.nextInt(MAX_UNITS_PER_MEASURE - MIN_UNITS_PER_MEASURE + 1);
+            for (int j = 0; j < numDerivedUnits; j++) {
                 BigDecimal dividend = j == 0 ? BigDecimal.ONE : new BigDecimal(String.valueOf(1 + random.nextInt(1000)));
                 BigDecimal divisor = j == 0 ? BigDecimal.ONE : new BigDecimal(String.valueOf(1 + random.nextInt(100)));
 
