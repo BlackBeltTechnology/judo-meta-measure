@@ -1,0 +1,62 @@
+# judo-meta-measure
+
+> An EMF/Ecore metamodel implementing the SI (International System of Units) standard for representing base measures, derived measures, units, and conversion rates within the JUDO model-driven ecosystem.
+
+Key facts:
+- Java 21 with Maven 3.9.4+ and Tycho 4.0.13 (Eclipse plugin builds)
+- Multi-module Maven/Tycho project with 6 modules
+- Core technologies: EMF/Ecore 2.38.0, Epsilon 2.8.0 (EVL validation), MWE2 2.13.0 (code generation)
+- Dual packaging: Eclipse plugin (Tycho/P2) and standard OSGi bundle (Felix)
+- Part of the [judo-community](https://github.com/BlackBeltTechnology/judo-community) ecosystem
+- License: Eclipse Public License 2.0 (EPL-2.0)
+
+## Docs
+
+- [README.md](README.md): Project overview, metamodel description, module diagram, and quick start
+- [AGENTS.md](AGENTS.md): Developer guide with build commands, directory structure, and coding conventions
+- [CONTRIBUTING.md](CONTRIBUTING.md): Development setup, troubleshooting, and submission guidelines
+- [.github/CIFLOW.md](.github/CIFLOW.md): CI/CD pipeline flows and branching strategy
+
+## Modules — Core
+
+- [model/model/measure.ecore](model/model/measure.ecore): Ecore metamodel definition — source of truth for all generated code
+- [model/model/measure.genmodel](model/model/measure.genmodel): EMF code generation configuration
+- [model/src/workflow/generateModel.mwe2](model/src/workflow/generateModel.mwe2): MWE2 workflow orchestrating the code generation pipeline
+- [model/src/main/epsilon/validations/measure.evl](model/src/main/epsilon/validations/measure.evl): Epsilon validation rules for measure models
+
+## Modules — Testing
+
+- [model-test/pom.xml](model-test/pom.xml): JUnit 5 unit tests for model creation, XMI ID validation, and Epsilon constraint execution
+- [osgi-itest/pom.xml](osgi-itest/pom.xml): Pax Exam integration tests deploying the bundle into a Karaf container
+
+## Modules — Packaging
+
+- [osgi/pom.xml](osgi/pom.xml): OSGi bundle repackaging with MeasureModelBundleTracker for auto-discovery of measure models
+- [feature/feature.xml](feature/feature.xml): Eclipse feature descriptor for plugin installation via P2
+- [site/pom.xml](site/pom.xml): P2 update site for Eclipse marketplace distribution
+
+## Depends on
+
+- [osgi-utils](../../runtime/osgi-utils): runtime/osgi-utils
+- [epsilon-runtime](../../tools/epsilon-runtime): tools/epsilon-runtime
+
+## Used by
+
+- [judo-meta-expression](../judo-meta-expression): models/judo-meta-expression
+- [judo-meta-expression-asm](../judo-meta-expression-asm): models/judo-meta-expression-asm
+- [judo-meta-expression-esm](../judo-meta-expression-esm): models/judo-meta-expression-esm
+- [judo-meta-expression-psm](../judo-meta-expression-psm): models/judo-meta-expression-psm
+- [judo-meta-script](../judo-meta-script): models/judo-meta-script
+- [judo-platform](../../runtime/judo-platform): runtime/judo-platform
+- [judo-runtime-core](../../runtime/judo-runtime-core): runtime/judo-runtime-core
+- [judo-runtime-core-esm-itest](../../runtime/judo-runtime-core-esm-itest): runtime/judo-runtime-core-esm-itest
+- [judo-services](../../runtime/judo-services): runtime/judo-services
+- [judo-tatami](../../runtime/judo-tatami): runtime/judo-tatami
+- [judo-tatami-base](../../runtime/judo-tatami-base): runtime/judo-tatami-base
+
+## Optional
+
+- [.github/workflows/build.yml](.github/workflows/build.yml): Main CI/CD pipeline (build, test, deploy, release)
+- [LICENSE.txt](LICENSE.txt): Eclipse Public License 2.0 text
+- [pom.xml](pom.xml): Parent POM with properties, dependency management, build plugins, and profiles
+- [logback-test.xml](logback-test.xml): Test logging configuration
