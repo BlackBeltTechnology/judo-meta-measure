@@ -38,6 +38,18 @@
 			<scope>test</scope>
 		</dependency>
 
+		<!-- Zeta validation framework -->
+		<dependency>
+			<groupId>hu.blackbelt.judo.zeta</groupId>
+			<artifactId>hu.blackbelt.judo.zeta.annotations</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>hu.blackbelt.judo.zeta</groupId>
+			<artifactId>hu.blackbelt.judo.zeta.validation-core</artifactId>
+			<scope>test</scope>
+		</dependency>
+
 	</dependencies>
 
 </project>

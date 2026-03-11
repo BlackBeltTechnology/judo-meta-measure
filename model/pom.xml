@@ -172,5 +172,19 @@
             <artifactId>epsilon-runtime-execution</artifactId>
             <scope>provided</scope>
         </dependency>
+
+        <!-- Zeta validation framework -->
+        <dependency>
+            <groupId>hu.blackbelt.judo.zeta</groupId>
+            <artifactId>hu.blackbelt.judo.zeta.annotations</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>hu.blackbelt.judo.zeta</groupId>
+            <artifactId>hu.blackbelt.judo.zeta.common</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>hu.blackbelt.judo.zeta</groupId>
+            <artifactId>hu.blackbelt.judo.zeta.validation-core</artifactId>
+        </dependency>
     </dependencies>
 </project>
