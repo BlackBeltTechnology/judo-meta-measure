@@ -1,114 +1,133 @@
-# Development version and branch handling
+# Development Version and Branch Handling
+
+This document describes the branching strategy, version numbering, and CI/CD pipeline flows used by this project. The workflow is based on [GitFlow](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow).
 
 ## Branches
 
-Versioning policy of JUDO NG modules are based on GitFlow: https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow
-
-Branches:
-
-* **develop**: development branch contains latest development sources of the last active version
-* **feature/JNG-NUMBER_short_summary**: feature branches are based on **develop** and contains sources of new features that will be included in last active version
-* **(release/)1_0_beta1**: release branches of 1.0-beta1 (release/ prefix is still reserved for CI)
-* **bugfix/JNG-NUMBER_short_summary**, **support/JNG-NUMBER_short_summary**: bugfix and support branches are based on release branches and must be applied to release and development branches of newer versions too
-* **master**: contains latest released sources of the last active version
+The repository uses a structured branching model where each branch type serves a specific purpose in the development lifecycle:
 
 ```mermaid
-gitGraph
-    commit id: "initial"
+gitDiagram
+    commit id: "init"
     branch develop
+    checkout develop
     commit id: "dev-1"
     branch feature/JNG-1
-    commit id: "feat-1"
-    commit id: "feat-2"
+    commit id: "feat-1a"
+    commit id: "feat-1b"
     checkout develop
-    merge feature/JNG-1
+    merge feature/JNG-1 id: "merge-feat-1"
     branch feature/JNG-2
-    commit id: "feat-3"
+    commit id: "feat-2a"
     checkout develop
-    merge feature/JNG-2
+    merge feature/JNG-2 id: "merge-feat-2"
     branch release/1.0-beta1
-    commit id: "rel-1"
-    branch bugfix/JNG-4
-    commit id: "bug-1"
+    commit id: "rc-1"
+    branch bugfix/JNG-3
+    commit id: "fix-3"
     checkout release/1.0-beta1
-    merge bugfix/JNG-4
+    merge bugfix/JNG-3 id: "merge-fix"
     checkout develop
-    merge release/1.0-beta1
-    checkout main
-    merge release/1.0-beta1 tag: "v1.0-beta1"
+    merge release/1.0-beta1 id: "back-merge"
+    checkout master
+    merge release/1.0-beta1 id: "release-1.0"
 ```
 
-## Version numbers
+| Branch Pattern | Base | Purpose |
+|----------------|------|---------|
+| `develop` | — | Main development branch; contains latest development sources of the active version |
+| `feature/JNG-NUMBER_short_summary` | `develop` | New features that will be included in the next version |
+| `(release/)X.Y.Z` | `develop` | Release stabilization branches (`release/` prefix reserved for CI) |
+| `bugfix/JNG-NUMBER_short_summary` | release branch | Bug fixes applied during release testing; must also be applied to develop and newer releases |
+| `support/JNG-NUMBER_short_summary` | release branch | Maintenance patches for previously released versions |
+| `hotfix/JNG-NUMBER_short_summary` | `master` | Critical fixes applied directly to production; merged to both master and develop |
+| `master` | — | Contains the latest released sources |
 
-Version numbers are increased using semantic versioning:
+## Version Numbers
 
-* do not change version numbers on starting feature/ branches
-* 2nd number in version of **develop** branch is increased when a release branch started
-* do not change version numbers on bugfix/ branches - that are applied on release branches during testing before releasing it (merging to master)
-* 3rd number in version of support/ branches is increased when started - it is used to support a previous release including new (minor) changes; support/ branches are merged back to release branch when update is released (without merging changes to master)
-* 4th number in version of hotfix/ branches is increased when started (that are applied on both release and master branches)
+Version numbers follow semantic versioning with these rules:
 
-## GitHub Action Flows
+| Event | Version Change |
+|-------|---------------|
+| Start a `feature/` branch | No change — inherits from develop |
+| Start a `release/` branch | 2nd number on develop is incremented |
+| Start a `bugfix/` branch | No change — applied to release during testing |
+| Start a `support/` branch | 3rd number is incremented |
+| Start a `hotfix/` branch | 4th number is incremented |
 
-### build.yml
+## GitHub Actions CI/CD Flows
+
+The project uses several GitHub Actions workflows that trigger each other in a pipeline:
+
+### build.yml — Main Build Pipeline
+
+Triggers on pushes to `develop` and pull requests targeting `develop`, `master`, `increment/*`, or `release/*`.
 
 ```mermaid
 flowchart TD
-    A[Push on develop or PR on develop/master/increment/release] --> B{Branch type?}
-    B -->|master, release/*| C[Set version from pom.xml without -SNAPSHOT]
-    B -->|develop, increment/*| D[Set version major.minor.qualifier.date_commitId_branchName]
-    C --> E[Build and deploy to nexus]
-    D --> E
-    E --> F[Create git tag v-version]
-    F --> G{PR or commit branch?}
-    G -->|increment/*, release/*| H[Create tag merge-pr/version]
-    H --> I[Trigger merge-pr-tagged.yml]
-    G -->|develop| J[Build change log]
-    J --> K[Create GitHub release prerelease with change log]
+    START["Push on develop<br/>or PR on develop/master/increment/release"]
+    START --> CHECK{Branch type?}
+    CHECK -->|master, release/*| VER_REL["Set version from pom.xml<br/>(without -SNAPSHOT)"]
+    CHECK -->|develop, increment/*| VER_DEV["Set version<br/>major.minor.qualifier.date_commitId_branch"]
+    VER_REL --> BUILD["Build and deploy<br/>to Nexus"]
+    VER_DEV --> BUILD
+    BUILD --> TAG["Create git tag<br/>v&lt;version&gt;"]
+    TAG --> CHECK2{Branch type?}
+    CHECK2 -->|increment/*, release/*| MERGE_TAG["Create tag<br/>merge-pr/&lt;version&gt;"]
+    MERGE_TAG --> TRIGGER1["Trigger merge-pr-tagged.yml"]
+    CHECK2 -->|develop| CHANGELOG["Build change log"]
+    CHANGELOG --> GH_RELEASE["Create GitHub release<br/>(prerelease)"]
+    CHECK2 -->|other| DONE[End]
 ```
 
-### merge-pr-tagged.yml
+### merge-pr-tagged.yml — PR Merge Automation
+
+Triggers on push of `merge-pr/*` tags. Determines whether to merge to master or squash to develop based on version format:
 
 ```mermaid
 flowchart TD
-    A[Push on merge-pr/* tag] --> B[Get version from tag name]
-    B --> C{Version format?}
-    C -->|major.minor.qualifier| D[Merge PR to master]
-    D --> E[Trigger create-release-on-master.yml]
-    C -->|other| F[Squash PR to develop]
-    F --> G[Trigger build.yml]
-    E --> H[Delete tag merge-pr/version]
-    G --> H
+    START["Push on merge-pr/* tag"]
+    START --> EXTRACT["Extract version from tag"]
+    EXTRACT --> CHECK{Version format?}
+    CHECK -->|major.minor.qualifier| MERGE["Merge PR to master"]
+    MERGE --> TRIGGER_MASTER["Trigger create-release-on-master.yml"]
+    CHECK -->|other format| SQUASH["Squash PR to develop"]
+    SQUASH --> TRIGGER_BUILD["Trigger build.yml"]
+    MERGE --> CLEANUP["Delete merge-pr/* tag"]
+    SQUASH --> CLEANUP
 ```
 
-### create-release-on-master.yml
+### create-release-on-master.yml — Release Publication
+
+Triggers on push to `master`. Creates the final GitHub release with a change log.
+
+```mermaid
+flowchart LR
+    PUSH["Push on master"] --> VERSION["Get version from tag"]
+    VERSION --> LOG["Build change log"]
+    LOG --> RELEASE["Create GitHub release<br/>(latest)"]
+```
+
+### release.yml — Release Initiation
+
+Manually triggered with a version parameter (or `auto` to read from pom.xml):
 
 ```mermaid
 flowchart TD
-    A[Push on master branch] --> B[Get version from tag name]
-    B --> C[Build change log]
-    C --> D[Create GitHub release last with change log]
+    START["Manual trigger<br/>with version or 'auto'"]
+    START --> CHECK{Version = 'auto'?}
+    CHECK -->|yes| AUTO["Read version from pom.xml<br/>(strip -SNAPSHOT)"]
+    CHECK -->|no| MANUAL["Use given version"]
+    AUTO --> NEXT["Calculate next version<br/>(qualifier + 1)"]
+    MANUAL --> NEXT
+    NEXT --> PR_MASTER["Create PR to master<br/>with release version"]
+    NEXT --> PR_DEVELOP["Create PR to develop<br/>with next version"]
+    PR_MASTER --> BUILD1["Trigger build.yml"]
+    PR_DEVELOP --> BUILD2["Trigger build.yml"]
 ```
 
-### release.yml
+## Development Rules
 
-```mermaid
-flowchart TD
-    A[Manually triggered with given version] --> B{Version is auto?}
-    B -->|yes| C[Set release version from pom.xml without -SNAPSHOT]
-    B -->|no| D[Set release version to given version]
-    C --> E[Set next version to release version qualifier + 1]
-    D --> E
-    E --> F[Create PR on master with release version]
-    F --> G[Trigger build.yml]
-    E --> H[Create PR on develop with next version]
-    H --> I[Trigger build.yml]
-```
+> **Important:** There is no commit without a ticket number. Every pull request and commit must reference a `JNG-xxx` JIRA ticket.
 
-## How to develop
-
-For issue tracking we are using [JIRA](https://blackbelt.atlassian.net/jira/dashboards). Golden rule:
-
-> **IMPORTANT:** There is no commit without ticket number
-
-So for pull request or commit `JNG-xxx` have to be presented in the commit.
+Issue tracking is managed via [JIRA](https://blackbelt.atlassian.net/jira/dashboards).
