@@ -1,1 +1,71 @@
+// Measure model validation rules
 
+context MEASURE!Measure {
+
+    // Circular references in measure with terms is invalid
+    constraint NoCircularReferencesOfMeasureWithTerms {
+        guard: self.isTypeOf(MEASURE!DerivedMeasure) and not self.terms.isEmpty()
+        check {
+            var visited = Set{};
+            var toVisit = self.terms.collect(t | t.baseMeasure).asSet();
+            while (not toVisit.isEmpty()) {
+                var current = toVisit.first();
+                toVisit.remove(current);
+                if (current == self) {
+                    return false;
+                }
+                if (not visited.includes(current)) {
+                    visited.add(current);
+                    if (current.isTypeOf(MEASURE!DerivedMeasure)) {
+                        toVisit.addAll(current.terms.collect(t | t.baseMeasure).asSet());
+                    }
+                }
+            }
+            return true;
+        }
+        message: "Derived measure definition " + self.name + " is recursive"
+    }
+
+    // Symbol of measures must be unique
+    constraint MeasureSymbolIsUnique {
+        guard: self.symbol.isDefined() and self.symbol <> ""
+        check: not MEASURE!Measure.all.excluding(self).exists(m | m.symbol == self.symbol)
+        message: "Measure symbol is not unique: " + self.symbol + " (measure: " + self.name + ")"
+    }
+
+    // Base unit of measure should be defined (recommended only, base unit is used for calculations)
+    critique BaseUnitShouldBeDefined {
+        check: self.units.exists(u | u.rateDividend == u.rateDivisor)
+        message: "No base unit is defined for measure: " + self.name
+    }
+
+    // Measure name should be unique
+    critique MeasureNameIsUnique {
+        check: not MEASURE!Measure.all.excluding(self).exists(m | m.name.isDefined() and self.name.isDefined() and m.name.toLowerCase() == self.name.toLowerCase())
+        message: "There are two or more measures of the same name: " + self.name
+    }
+}
+
+context MEASURE!Unit {
+
+    // Unit symbol must be unique in its measure
+    constraint UnitSymbolIsUniqueInMeasure {
+        guard: self.symbol.isDefined() and self.symbol <> "" and self.eContainer.isDefined()
+        check: not self.eContainer.units.excluding(self).exists(u | u.symbol.isDefined() and u.symbol == self.symbol)
+        message: "Unit symbol: " + self.symbol + " of unit: " + self.name + " of measure: " + self.eContainer.name + " is not unique"
+    }
+
+    // Unit name should be unique within measure
+    critique UnitNameIsUnique {
+        guard: self.name.isDefined() and self.eContainer.isDefined()
+        check: not self.eContainer.units.excluding(self).exists(u | u.name.isDefined() and u.name.toLowerCase() == self.name.toLowerCase())
+        message: "There are two or more units of the same name: " + self.name + " in measure: " + self.eContainer.name
+    }
+
+    // Unit symbol should be unique globally
+    critique UnitSymbolIsUnique {
+        guard: self.symbol.isDefined() and self.symbol <> ""
+        check: not MEASURE!Unit.all.excluding(self).exists(u | u.symbol.isDefined() and u.symbol == self.symbol)
+        message: "There are two or more units that have the same symbol: " + self.symbol
+    }
+}
