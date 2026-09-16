@@ -49,6 +49,10 @@
         <feature>cxf-jaxrs</feature>
         <feature>cxf-jackson</feature>
         <feature>cxf-rs-description-swagger2</feature>
+        <!-- Zeta validation framework bundles -->
+        <bundle>mvn:hu.blackbelt.judo.zeta/hu.blackbelt.judo.zeta.annotations/${judo-zeta-version}</bundle>
+        <bundle>mvn:hu.blackbelt.judo.zeta/hu.blackbelt.judo.zeta.common/${judo-zeta-version}</bundle>
+        <bundle>mvn:hu.blackbelt.judo.zeta/hu.blackbelt.judo.zeta.validation-core/${judo-zeta-version}</bundle>
     </feature>
 
 </features>
