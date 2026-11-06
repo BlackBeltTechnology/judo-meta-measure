@@ -1,94 +1,78 @@
-# judo-meta-measure - Project Documentation
+# judo-meta-measure — module agent doctrine
 
-## Project Overview
+## Module purpose
 
+`judo-meta-measure` is the estate's authority on *how a measured quantity is
+expressed and converted*: it owns the `measure` Ecore metamodel
+(`nsURI http://blackbelt.hu/judo/meta/measure`) so that "this attribute is a
+duration in minutes" is a typed model fact rather than a naming convention. A
+`BaseMeasure` (mass, length, time) names a dimension; a `DerivedMeasure` defines
+its dimension as a product of `BaseMeasureTerm`s — a `baseMeasure` raised to an
+integer `exponent` — which is what makes `velocity = length¹ · time⁻¹`
+machine-checkable instead of documentation. Each `Measure` contains `Unit`s, and
+a unit carries its conversion rule as an exact `rateDividend`/`rateDivisor`
+`BigDecimal` pair relative to the measure's base unit, so unit conversion in
+generated applications is rational arithmetic with no floating-point drift. The
+`DurationUnit`/`DurationType` pair is the one calendar-aware exception: a
+duration unit additionally declares which of `nanosecond … year` it means, so
+downstream code can tell an exactly-convertible unit (second, minute) from a
+calendar-dependent one (month, year).
 
-**Repository:** BlackBeltTechnology/judo-meta-measure
-**License:** Eclipse Public License 2.0 (EPL-2.0)
-**Java Version:** 21
-**Build System:** Maven 3.9.4+ with Tycho 4.0.13 (Eclipse plugin builds)
+Who validates against it: the EVL rules in
+`model/src/main/epsilon/validations/measure.evl` and the equivalent Zeta Java
+rules (`MeasureValidations`, `UnitValidations`) enforce the invariants a
+conversion engine depends on — derived-measure term graphs must be acyclic,
+measure symbols globally unique, unit symbols unique inside their measure — and
+raise critiques where a model is merely suspect (no base unit with
+`rateDividend == rateDivisor`, duplicate case-insensitive names, globally
+duplicated unit symbols). `MeasureEpsilonValidator` resolves those scripts
+across JAR, OSGi-bundle and filesystem layouts; `MeasureUtils` loads/queries
+measure resources and enforces XMI id uniqueness.
 
-1. Defines an EMF/Ecore metamodel for the SI (International System of Units) standard, representing base measures, derived measures, units, and conversion rates
-2. Generates Java classes, builders, helpers, and runtime model support from the Ecore definition via MWE2 workflows
-3. Packages the metamodel as both an Eclipse plugin (via Tycho/P2) and a standard OSGi bundle (via Felix Maven Bundle Plugin) for use in JUDO transformation pipelines
-4. Provides Epsilon EVL-based model validation and an OSGi bundle tracker for auto-discovery of measure models at runtime
-5. Part of the [judo-community](https://github.com/BlackBeltTechnology/judo-community) ecosystem
+What it ships: the EMF-generated Java API (interfaces, `*Impl`, factory,
+package, builders, helpers — regenerated from `measure.genmodel` by the MWE2
+workflow in `model/src/workflow/`), the hand-written runtime under
+`model/src/main/java/`, and three delivery shapes of the same artifact — an
+Eclipse plugin, an installable feature plus P2 update site, and a standalone
+Felix OSGi bundle for Karaf.
 
-## Code Instructions
+**Repository:** BlackBeltTechnology/judo-meta-measure ·
+**Artifact:** `hu.blackbelt.judo.meta:hu.blackbelt.judo.meta.measure`
+(packaging `pom`, version `${revision}` = `1.0.2-SNAPSHOT`) ·
+**License:** EPL-2.0 · **Java:** 21 ·
+**Build:** Maven 3.9.4+ / Eclipse Tycho 4.0.13 ·
+Part of the [judo-community](https://github.com/BlackBeltTechnology/judo-community) ecosystem.
 
-1. First think through the problem, read the codebase for relevant files.
-2. Before you make any major changes, check in with me and I will verify the plan.
-3. Please every step of the way just give me a high level explanation of what changes you made.
-4. Make every task and code change you do as simple as possible. We want to avoid making any massive or complex changes. Every change should impact as little code as possible. Everything is about simplicity.
-5. Maintain a documentation file that describes how the architecture of the app works inside and out.
-6. Never speculate about code you have not opened. If the user references a specific file, you MUST read the file before answering. Make sure to investigate and read relevant files BEFORE answering questions about the codebase. Never make any claims about code before investigating unless you are certain of the correct answer - give grounded and hallucination-free answers.
-7. For implementation use TDD (Test-Driven Development): write or update tests first to define the expected behaviour, verify they fail, then write the minimal implementation to make them pass.
-8. Use DRY (Don't Repeat Yourself): extract reusable logic into separate classes, utilities, or components. If the same pattern appears in multiple places, refactor it into a shared helper.
+## Reactor map
 
-## Directory Structure
+The root `pom.xml` declares its `<modules>` inside the `modules` profile, which
+is active unless `-DskipModules=true` is passed. Build order is the declared
+order — `model` produces the artifact every other module consumes.
 
-```
-judo-meta-measure/
-├── model/                  # Core metamodel (eclipse-plugin)
-│   ├── model/              # measure.ecore + measure.genmodel
-│   ├── src/main/java/      # Hand-written code (MeasureUtils, validator, activator)
-│   ├── src/main/epsilon/   # EVL validation scripts
-│   ├── src/workflow/        # MWE2 code generation workflow
-│   ├── src-gen/            # EMF-generated Java (DO NOT EDIT)
-│   └── META-INF/           # OSGi manifest
-├── model-test/             # JUnit 5 unit tests
-├── osgi/                   # OSGi bundle wrapper
-│   └── src/main/java/      # MeasureModelBundleTracker
-├── osgi-itest/             # Pax Exam / Karaf integration tests
-├── feature/                # Eclipse feature definition
-├── site/                   # P2 update site
-├── .github/workflows/      # CI/CD pipelines
-└── .mvn/                   # Maven wrapper + extensions
-```
+<modules>
+  <module>model</module>
+  <module>model-test</module>
+  <module>osgi</module>
+  <module>osgi-itest</module>
+  <module>feature</module>
+  <module>site</module>
+</modules>
 
-## Core Modules
+| Module | Artifact / packaging | What it contributes |
+|---|---|---|
+| `model` | `…measure.model`, `eclipse-plugin` | The metamodel and everything derived from it: `model/model/measure.ecore` + `.genmodel`, the MWE2 workflow that regenerates `src-gen/`, the EVL validation scripts, and the hand-written runtime (`MeasureUtils`, `MeasureEpsilonValidator`, `MeasureValidator`/`MeasureConstraints` and the Zeta rule classes, plus the Eclipse `Activator`). Every other reactor module consumes or repackages this one. |
+| `model-test` | `…measure.model.test`, `jar` | JUnit 5 proof that the runtime behaves: model resource creation (`MeasureExecutionContextTest`), XMI id uniqueness (`MeasureUtilsTest`), and EVL constraint execution (`MeasureValidationTest`). Consumes `model` as a dependency, so it exercises the published API surface. |
+| `osgi` | `…measure.osgi`, `bundle` (Felix) | Repackages `model` for non-Eclipse OSGi containers, exporting the `hu.blackbelt.judo.meta.measure.*` packages and shipping `MeasureModelBundleTracker`, which discovers measure models advertised by the `Measure-Models` manifest header and registers them as OSGi services. |
+| `osgi-itest` | `…measure.osgi.itest`, `jar` | Pax Exam 4.13.5 integration tests that boot an Apache Karaf 4.4.7 container and assert the bundle really resolves and validates there (`MeasureModelLoadITest`) — the check unit tests structurally cannot make. |
+| `feature` | `…measure.feature`, `eclipse-feature` | Installable Eclipse feature grouping the plugin so the metamodel can be consumed from an IDE workspace. Descriptor-only module, no sources. |
+| `site` | `…measure.site`, `eclipse-repository` | Builds the P2 update site published for "Install New Software" and consumed as a P2 repository by downstream Tycho builds. Its category P2 URLs carry hardcoded versions (see `update-category-versions`). |
 
-### Model Layer
+`targetdefinition/` is not a reactor module — it holds the Tycho target
+platform definition consumed by the Tycho builds above.
 
-| Module | Type | Purpose |
-|--------|------|---------|
-| `model/` | eclipse-plugin | Ecore metamodel definition (`measure.ecore`), EMF-generated Java classes in `src-gen/`, hand-written utilities in `src/main/java/`, Epsilon validation scripts in `src/main/epsilon/validations/`, and MWE2 code generation workflow |
+## Build commands
 
-### Test Layer
-
-| Module | Type | Purpose |
-|--------|------|---------|
-| `model-test/` | jar | JUnit 5 tests for model resource creation (`MeasureExecutionContextTest`), XMI ID uniqueness validation (`MeasureUtilsTest`), and Epsilon constraint execution (`MeasureValidationTest`) |
-| `osgi-itest/` | jar | Pax Exam integration tests deploying the OSGi bundle into a Karaf 4.4.7 container, verifying bundle loading and model validation via `MeasureModelLoadITest` |
-
-### Packaging Layer
-
-| Module | Type | Purpose |
-|--------|------|---------|
-| `osgi/` | bundle | Repackages the model as a standard OSGi bundle using Felix Maven Bundle Plugin. Exports all `hu.blackbelt.judo.meta.measure.*` packages. Includes `MeasureModelBundleTracker` for auto-discovery of measure models via the `Measure-Models` manifest header |
-| `feature/` | eclipse-feature | Eclipse feature descriptor for plugin installation via P2 |
-| `site/` | eclipse-repository | P2 update site repository for Eclipse marketplace distribution |
-
-## Technology Stack
-
-### Core Technologies
-
-- **EMF/Ecore 2.38.0** — metamodel definition and Java code generation
-- **Tycho 4.0.13** — Maven plugin for building Eclipse plugins, features, and P2 sites
-- **Epsilon Runtime 2.8.0** — model validation via EVL (Epsilon Validation Language) scripts
-- **MWE2 2.13.0** — model workflow engine for code generation (EcoreGenerator → Helpers → Builders → RuntimeModel)
-- **OSGi 7.0.0** — modular runtime with bundle tracking and service registration
-- **Lombok 1.18.34** — annotation processing (non-Eclipse modules only; Tycho incompatible)
-
-### Build & Quality
-
-- **Maven 3.9.4+** with Maven wrapper (`mvnw`)
-- **JUnit 5.9.1** for unit tests, **Pax Exam 4.13.5** with **Karaf 4.4.7** for OSGi integration tests
-- **JaCoCo 0.8.12** for code coverage
-- **SonarQube** via sonar-maven-plugin 3.9.1 for quality metrics
-- **Flatten Maven Plugin 1.3.0** for CI-friendly `${revision}` version resolution
-
-## Build Commands
+A Maven wrapper is bundled; prefer `./mvnw` over a repo-root `mvn`.
 
 ```bash
 # Full build with tests
@@ -112,10 +96,10 @@ mvn clean install -P update-category-versions -f site/pom.xml
 
 > **Note:** Maven wrapper is available: `./mvnw clean install`
 
-### Maven Profiles
+### Maven profiles
 
 | Profile | Purpose |
-|---------|---------|
+|---|---|
 | `modules` | Activates all submodule builds (active by default unless `-DskipModules=true`) |
 | `sign-artifacts` | GPG-signs artifacts using sign-maven-plugin |
 | `release-dummy` | Deploys to local `/tmp/` filesystem for testing |
@@ -124,56 +108,142 @@ mvn clean install -P update-category-versions -f site/pom.xml
 | `generate-github-asciidoc-diagrams` | Generates PNG diagrams from AsciiDoc via AsciidoctorJ |
 | `update-source-code-license` | Updates EPL-2.0 license headers in source files |
 
-## Key Configuration Files
+## Technology stack
 
-| File | Purpose |
-|------|---------|
-| `pom.xml` | Parent POM: properties, dependency management, build plugins, profiles |
-| `model/model/measure.ecore` | Ecore metamodel definition (source of truth for all generated code) |
-| `model/model/measure.genmodel` | EMF code generation configuration |
-| `model/src/workflow/generateModel.mwe2` | MWE2 workflow orchestrating the code generation pipeline |
-| `model/src/main/epsilon/validations/measure.evl` | Epsilon validation rules for measure models |
-| `model/META-INF/MANIFEST.MF` | Eclipse plugin / OSGi bundle manifest |
-| `model/build.properties` | Eclipse build configuration |
-| `.mvn/extensions.xml` | Maven wagon extensions (file, webdav protocols) |
-| `logback-test.xml` | Test logging configuration (INFO level, console appender) |
-| `.github/workflows/build.yml` | Main CI/CD pipeline (build, test, deploy, release) |
+- **EMF/Ecore 2.38.0** — metamodel definition and Java code generation
+- **Tycho 4.0.13** — builds the Eclipse plugin, feature and P2 site
+- **Epsilon Runtime 2.8.0** — EVL model validation
+- **MWE2 2.13.0** — code generation workflow (EcoreGenerator → Helpers → Builders → RuntimeModel)
+- **OSGi 7.0.0** — bundle tracking and service registration
+- **Lombok 1.18.34** — annotation processing, non-Eclipse modules only (Tycho incompatible)
+- **JUnit 5.9.1**; **Pax Exam 4.13.5** + **Karaf 4.4.7** for OSGi integration tests
+- **JaCoCo 0.8.12** coverage, **SonarQube** via sonar-maven-plugin 3.9.1
+- **Flatten Maven Plugin 1.3.0** resolves the CI-friendly `${revision}`
+- Maven 3.9.4+ with wrapper (`mvnw`); `.mvn/extensions.xml` adds the file and webdav wagons
 
-## Development Environment
+## Development environment
 
-**Required:**
-- Java 21 JDK
-- Maven 3.9.4+
+**Required:** Java 21 JDK, Maven 3.9.4+.
 
-**For Eclipse plugin development:**
-- Eclipse IDE with m2e, Epsilon, Modeling Tools, XTend, XText, MWE/MWE2 plugins
-- Install the plugin via P2 sites for editor support
+**Eclipse plugin development:** Eclipse IDE with m2e, Epsilon, Modeling Tools,
+XTend, XText and MWE/MWE2 plugins; install the plugin via P2 sites for editor
+support.
 
-**For OSGi testing:**
-- No additional setup — Pax Exam provisions Karaf automatically during `mvn verify`
+**OSGi testing:** no additional setup — Pax Exam provisions Karaf during
+`mvn verify`.
 
-## Git Workflow
+The root `pom.xml` is the parent POM (properties, dependency management, build
+plugins, profiles). Root-level `logback-test.xml` configures test logging at
+INFO to a console appender. CI/CD lives in `.github/workflows/build.yml`
+(build, test, deploy, release).
 
-- **Main Branch:** `develop`
-- **Release Branch:** `master` (latest released version)
-- **Versioning:** `${revision}` = `1.0.2-SNAPSHOT` (CI-friendly, resolved by flatten plugin)
+## Git workflow
+
+- **Main branch:** `develop`; **release branch:** `master` (latest released version)
+- **Versioning:** `${revision}` = `1.0.2-SNAPSHOT`, CI-friendly, resolved by the flatten plugin
 - **Branch naming:** `feature/JNG-XXXX_description`, `bugfix/JNG-XXXX_*`, `support/JNG-XXXX_*`, `hotfix/JNG-XXXX_*`
-- **Rule:** Every commit must reference a JIRA ticket (`JNG-xxx`)
-- **CI/CD:** GitHub Actions with automated versioning, Nexus deployment, P2 site publishing, and GitHub releases
+- **Rule:** every commit must reference a JIRA ticket (`JNG-xxx`)
+- **CI/CD:** GitHub Actions with automated versioning, Nexus deployment, P2 site publishing and GitHub releases
 
-## Important Notes
+## Important notes
 
-1. **Never hand-edit files in `model/src-gen/`** — these are generated from `measure.ecore` via the MWE2 workflow. Hand-written code belongs in `model/src/main/java/`
-2. **Tycho and Lombok are incompatible** — Lombok is only used in non-Eclipse modules (`model-test`, `osgi`, `osgi-itest`). Eclipse plugin modules (`model`) use only generated code
-3. **Dual packaging:** The `model` module produces an Eclipse plugin (Tycho), while `osgi` repackages it as a standard OSGi bundle (Felix). Both export the same API but target different runtimes
-4. **Version duality:** Maven uses `-SNAPSHOT` suffixes while Eclipse uses `.qualifier`. The Tycho Versions Plugin reconciles them during builds, producing versions like `1.0.2.20260225_143000_abc123_develop`
-5. **Epsilon validation scripts** in `model/src/main/epsilon/validations/` define model constraints. The `MeasureEpsilonValidator` class handles script location resolution across JAR, OSGi bundle, and filesystem environments
-6. **OSGi auto-discovery:** Bundles containing measure models declare them via the `Measure-Models` manifest header. The `MeasureModelBundleTracker` in the `osgi` module automatically loads and registers them as OSGi services
-7. **The `measure.evl` validation file is currently empty** — validation rules should be added there as model constraints are defined
+1. **Never hand-edit `model/src-gen/`** — it is generated from `measure.ecore`
+   via the MWE2 workflow (`model/src/workflow/generateModel.mwe2`). Hand-written
+   code belongs in `model/src/main/java/`.
+2. **Tycho and Lombok are incompatible** — Lombok is used only in the
+   non-Eclipse modules (`model-test`, `osgi`, `osgi-itest`). The Eclipse plugin
+   module (`model`) relies on generated code.
+3. **Dual packaging:** `model` produces an Eclipse plugin via Tycho while `osgi`
+   repackages it as a standard OSGi bundle via Felix. Both export the same API
+   but target different runtimes.
+4. **Version duality:** Maven uses `-SNAPSHOT` suffixes, Eclipse uses
+   `.qualifier`. The Tycho Versions Plugin reconciles them during builds,
+   producing versions like `1.0.2.20260225_143000_abc123_develop`.
+5. **Validation script resolution:** the EVL scripts live in
+   `model/src/main/epsilon/validations/`. `MeasureEpsilonValidator` resolves
+   their location across JAR, OSGi bundle and filesystem environments.
+   `measure-plugin-validation.evl` imports `measure.evl` and injects a native
+   `MeasureUtils` for the Eclipse editor's on-the-fly validation.
+6. **OSGi auto-discovery:** bundles carrying measure models declare them via the
+   `Measure-Models` manifest header; `MeasureModelBundleTracker` in the `osgi`
+   module loads and registers them as OSGi services.
+7. **Metamodel change ⇒ validation change.** Adding a classifier or feature to
+   `measure.ecore` obliges a matching rule (or a deliberate decision not to) in
+   both `measure.evl` and the Zeta rule classes under
+   `model/src/main/java/hu/blackbelt/judo/meta/measure/validation/rules/` —
+   the two validation paths are expected to agree.
 
-## Related Documentation
+## Related documentation
 
-- [README.md](README.md) — Project introduction and quick start
-- [CONTRIBUTING.md](CONTRIBUTING.md) — Development setup, troubleshooting, and submission guidelines
-- [.github/CIFLOW.md](.github/CIFLOW.md) — Detailed CI/CD pipeline flows and branching strategy
-- [judo-community](https://github.com/BlackBeltTechnology/judo-community) — Parent aggregator project
+- [README.md](README.md) — project introduction and quick start
+- [CONTRIBUTING.md](CONTRIBUTING.md) — development setup, troubleshooting, submission guidelines
+- [.github/CIFLOW.md](.github/CIFLOW.md) — CI/CD pipeline flows and branching strategy
+- [docs/validation/](docs/validation) — validation rule documentation
+- [judo-community](https://github.com/BlackBeltTechnology/judo-community) — parent aggregator project
+
+<!-- dox-doctrine -->
+## Documentation Update Protocol (WRITE discipline)
+
+Per-directory `AGENTS.md` files form a tree. Each directory `AGENTS.md` is the
+per-file record for the files in that directory. This module-root `AGENTS.md`
+holds doctrine + architecture pointers only — never a per-file index.
+
+**Keep the root lean.** This file loads into every agent turn — every byte costs
+tokens on every turn. A verbose root file buries the rules the model must follow
+(signal dilution) and measurably degrades adherence; a lean file keeps doctrine
+salient. Default assumption: your update does NOT belong in the root — route it
+by the table below.
+
+**Route every doc update by kind:**
+
+| Kind of update | Goes in |
+|---|---|
+| New file in a directory, or its per-file detail / change history | Nearest directory `AGENTS.md`. Add a `` | `<basename>` | <purpose> | `` row, path-alphabetical. |
+| Data flow, protocol, architecture rationale | `docs/architecture.md` or a `docs/<topic>.md` |
+| End-user / developer setup | `README.md` |
+| Cross-cutting rule every agent needs every turn (rare) | this module-root `AGENTS.md` |
+
+**Read before editing (chain walk).** Before editing a file, read the nearest
+`AGENTS.md` chain root→leaf so you know the file's recorded purpose, contracts,
+and change history. Do not edit blind.
+
+**Update after editing (closeout pass).** After changing a file, update its row
+in the nearest directory `AGENTS.md`: find the file's row, update its purpose in
+place; if absent, add it in path-alphabetical order. New directory → scaffold
+its `AGENTS.md`. One row per file. The purpose carries a one-line summary, key
+exported symbols, contracts/invariants, and `See change: <id>` history.
+
+**Row style (caveman).** Short declarative fragments. Drop articles. Subject →
+verb → object, present tense. One fact per row. Prefer concrete tokens (paths,
+symbols, env vars) over prose. Keep identifiers verbatim.
+
+**Size rule — split an over-large directory `AGENTS.md` file-based.** pi
+auto-injects a directory `AGENTS.md` on every turn when cwd sits at/below it, so
+an over-large directory `AGENTS.md` is not supported. Split it file-based: a row
+exceeding the length threshold promotes to a per-file `<File>.AGENTS.md`
+sidecar carrying that file's full detail (including every `See change:`). The
+sidecar is pull-only — its name is not `AGENTS.md`, so pi never auto-injects it
+— yet it stays search-indexed (`agents` doc_type). The directory `AGENTS.md`
+keeps a one-line summary plus a `→ see `<File>.AGENTS.md`` pointer. Rows within
+the threshold stay verbatim (lossless).
+
+## Finding docs (READ discipline)
+
+`kb_*` tools are faster and cheaper than raw search — they return a one-line
+purpose + key exports per file, not raw bytes. **This fires on the ACTION, not
+the intent** — before you `grep`/`rg` for a symbol, `cat`/read a file to learn
+what it does, or chase an import, the kb call goes first. It fires **even
+mid-task when you already know the file**; knowing the file does not exempt you.
+When your reflex is the left column, run the right column instead:
+
+| You're about to… | Do this FIRST instead |
+|---|---|
+| `grep -rn "SymbolName" src/` — find where a fn / type / const lives | `kb_search --doc-type agents "SymbolName"` — tree indexes key exports per file |
+| `grep -rn "feature\|topic" src/` — how does X work / where's X handled | `kb_search "feature topic"` |
+| `cat` / read a file just to learn its purpose before editing | `kb agents <path>` — one-line purpose + exports + change history |
+| chase imports / callers across files | `kb_neighbors <path\|heading>` |
+| read one doc section in full | `kb_get <path> <section>` |
+
+**Fall-through (explicit):** if the kb call returns nothing relevant, `rg` /
+source read is allowed — then add the missing directory `AGENTS.md` row per the
+WRITE discipline. kb does NOT replace grep; it goes first.
